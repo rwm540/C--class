@@ -6,34 +6,41 @@
 
         <Border
             Width="850"
-            Height="560"
+            MaxWidth="920"
             Background="White"
             CornerRadius="20"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+            VerticalAlignment="Center"
+            Padding="30">
 
-            <StackPanel Margin="30"
-                        Spacing="20">
+            <StackPanel Spacing="20">
 
-                <!-- تصویر -->
-                <Image
-                    Source="avares://DentalCenter/Assets/Images/clinic.png"
-                    Height="300"
-                    Stretch="Uniform"/>
+                <Border Height="300"
+                        CornerRadius="12"
+                        Background="#E3F2FD"
+                        ClipToBounds="True">
+                    <Panel>
+                        <TextBlock Text="🦷"
+                                   FontSize="72"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                        <Image x:Name="HeroImage"
+                               Stretch="UniformToFill"/>
+                    </Panel>
+                </Border>
 
-                <!-- عنوان -->
                 <TextBlock
                     Text="طراحی ساختمان مرکز دندانپزشکی"
-                    FontSize="34"
+                    FontSize="32"
                     FontWeight="Bold"
-                    HorizontalAlignment="Center"/>
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"/>
 
                 <TextBlock
-
-                    Text=" رویکرد بهره‌ "
+                    Text="با رویکرد بهره‌وری انرژی"
                     FontSize="22"
                     Foreground="#1976D2"
-                    HorizontalAlignment="Center"/>
+                    TextAlignment="Center"/>
 
                 <Separator Margin="40,5"/>
 
