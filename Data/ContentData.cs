@@ -521,11 +521,32 @@ public static class ContentData
     };
 
     /// <summary>اعداد کلیدی که در صفحهٔ اصلی نمایش داده می‌شوند.</summary>
+    /// <summary>
+    /// اعداد کلیدی صفحهٔ اصلی. سه عدد اول از روی خود فهرست‌ها شمرده می‌شوند تا اگر
+    /// موضوعی اضافه یا کم شد، عدد صفحهٔ اصلی خودبه‌خود درست بماند.
+    /// عدد چهارم برابر خروجی واقعی ماشین‌حساب با فعال بودن همهٔ راهکارها (بدون پنل خورشیدی) است.
+    /// </summary>
     public static IReadOnlyList<Spec> HomeStats { get; } = new[]
     {
-        new Spec("۵", "تجهیز اصلی"),
-        new Spec("۵", "فضای معماری"),
-        new Spec("۶", "محور بهره‌وری انرژی"),
-        new Spec("۴۰٪", "پتانسیل کاهش مصرف")
+        new Spec(ToPersianDigits(Equipment.Count), "تجهیز اصلی"),
+        new Spec(ToPersianDigits(Spaces.Count), "فضای معماری"),
+        new Spec(ToPersianDigits(Energy.Count), "محور بهره‌وری انرژی"),
+        new Spec("۳۷٪", "کاهش مصرف با اجرای راهکارها")
     };
+
+    /// <summary>تبدیل عدد لاتین به رقم فارسی برای نمایش یکدست در رابط کاربری.</summary>
+    private static string ToPersianDigits(int value)
+    {
+        var digits = new[] { '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' };
+        var text = value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        var chars = text.ToCharArray();
+
+        for (var i = 0; i < chars.Length; i++)
+        {
+            if (chars[i] >= '0' && chars[i] <= '9')
+                chars[i] = digits[chars[i] - '0'];
+        }
+
+        return new string(chars);
+    }
 }

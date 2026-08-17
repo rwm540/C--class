@@ -97,8 +97,9 @@
                         <CheckBox x:Name="ChkSolar"
                                   Content="پنل خورشیدی روی بام"/>
 
-                        <StackPanel Spacing="4" IsVisible="True">
-                            <TextBlock Text="توان نصب‌شدهٔ پنل خورشیدی (کیلووات)"
+                        <StackPanel Spacing="4" Margin="24,4,0,0">
+                            <TextBlock x:Name="SolarLabel"
+                                       Text="توان نصب‌شدهٔ پنل خورشیدی (کیلووات)"
                                        FontSize="12.5" Opacity="0.7"/>
                             <NumericUpDown x:Name="SolarBox"
                                            Minimum="0" Maximum="200"
@@ -114,9 +115,10 @@
 
             <Button x:Name="btnCalculate"
                     Classes="primary"
-                    Content="محاسبه"
+                    Content="محاسبهٔ دوباره"
                     Width="180"
-                    HorizontalAlignment="Center"/>
+                    HorizontalAlignment="Center"
+                    ToolTip.Tip="نتیجه با هر تغییر ورودی به‌صورت خودکار به‌روز می‌شود."/>
 
             <!-- نتیجه -->
             <UniformGrid Columns="4">

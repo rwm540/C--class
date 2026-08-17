@@ -41,7 +41,10 @@ public partial class CalculatorView : UserControl
             SolarKw = Value(SolarBox, 10)
         };
 
+        // ورودی توان پنل فقط وقتی معنا دارد که گزینهٔ خورشیدی فعال باشد.
         SolarBox.IsEnabled = input.Solar;
+        SolarBox.Opacity = input.Solar ? 1.0 : 0.45;
+        SolarLabel.Opacity = input.Solar ? 0.7 : 0.35;
 
         var result = EnergyCalculator.Calculate(input);
 
