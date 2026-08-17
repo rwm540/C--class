@@ -15,8 +15,16 @@ dotnet publish $proj `
     --self-contained true `
     -p:PublishSingleFile=true `
     -p:IncludeNativeLibrariesForSelfExtract=true `
+    -p:IncludeAllContentForSelfExtract=true `
+    -p:PublishTrimmed=false `
+    -p:EnableCompressionInSingleFile=true `
+    -p:DebugType=embedded `
     -o $out
 
 Write-Host ""
 Write-Host "Done. Output:" -ForegroundColor Green
-Get-ChildItem $out -Filter *.exe | ForEach-Object { Write-Host ("  " + $_.FullName + "  (" + [math]::Round($_.Length/1MB,1) + " MB)") }
+Get-ChildItem $out -Filter *.exe | ForEach-Object {
+    Write-Host ("  " + $_.FullName + "  (" + [math]::Round($_.Length/1MB,1) + " MB)")
+}
+Write-Host ""
+Write-Host "همین فایل DentalCenter.exe را اجرا کنید. نیازی به نصب .NET روی سیستم مقصد نیست." -ForegroundColor Yellow

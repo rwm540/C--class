@@ -1,0 +1,15 @@
+Dental Center — چطور برنامه را اجرا کنید
+========================================
+
+روش درست (exe تک‌فایل که روی هر ویندوز باز می‌شود):
+  PowerShell:
+    ./build-exe.ps1
+  بعد فایل publish\DentalCenter.exe را اجرا کنید.
+
+اگر از Visual Studio فقط Build می‌گیرید:
+  DentalCenter.exe را از داخل همان پوشه bin\Debug\net10.0 (یا Release) اجرا کنید.
+  کل پوشه را با هم نگه دارید. فقط خودِ exe را به دسکتاپ کپی نکنید؛ بدون DLLها باز نمی‌شود.
+
+اگر پنجره نیامد:
+  فایل DentalCenter-crash.log کنار exe
+  یا %LOCALAPPDATA%\DentalCenter\crash.log

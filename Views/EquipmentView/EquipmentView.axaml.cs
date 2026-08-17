@@ -1,11 +1,12 @@
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
 using DentalCenter.Helpers;
 
 namespace DentalCenter.Views;
 
 public partial class EquipmentView : UserControl
 {
+    private string currentPdf = "";
+
     public EquipmentView()
     {
         InitializeComponent();
@@ -45,11 +46,11 @@ public partial class EquipmentView : UserControl
                 "Equipment/autoclave.png",
                 "Equipment/autoclave.pdf");
 
-       Show(
-    "یونیت دندانپزشکی",
-    "یونیت دندانپزشکی اصلی‌ترین تجهیز هر کلینیک است.",
-    "Equipment/unit.png",
-    "Equipment/unit.pdf");
+        Show(
+            "یونیت دندانپزشکی",
+            "یونیت دندانپزشکی اصلی‌ترین تجهیز هر کلینیک است.",
+            "Equipment/unit.png",
+            "Equipment/unit.pdf");
     }
 
     private void Show(
@@ -59,27 +60,13 @@ public partial class EquipmentView : UserControl
         string pdf)
     {
         EquipmentTitle.Text = title;
-
         EquipmentDescription.Text = description;
-
-        try
-        {
-            EquipmentImage.Source =
-                new Bitmap(AssetsHelper.Image(image));
-        }
-        catch
-        {
-            EquipmentImage.Source = null;
-        }
+        EquipmentImage.Source = AssetsHelper.LoadImage(image);
 
         btnPdf.Click -= OpenPdf;
-
         currentPdf = pdf;
-
         btnPdf.Click += OpenPdf;
     }
-
-    private string currentPdf = "";
 
     private void OpenPdf(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
