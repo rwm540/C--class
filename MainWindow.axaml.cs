@@ -26,7 +26,8 @@ public partial class MainWindow : Window
         new("👶", "بخش کودکان", () => new ChildrenView()),
         new("🧮", "محاسبهٔ انرژی", () => new CalculatorView()),
         new("☎", "تماس با ما", () => new ContactView()),
-        new("📝", "ثبت نظرات", () => new FeedbackView())
+        new("📝", "ثبت نظرات", () => new FeedbackView()),
+        new("💬", "نمایش نظرات", () => new CommentsView())
     };
 
     public MainWindow()

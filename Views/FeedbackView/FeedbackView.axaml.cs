@@ -147,9 +147,12 @@ public partial class FeedbackView : UserControl
         foreach (var item in FeedbackStore.Load())
             _items.Add(item);
 
-        CountText.Text = _items.Count == 0
+        var (total, average) = FeedbackStore.Summary();
+
+        CountText.Text = total == 0
             ? "بدون نظر"
-            : _items.Count + " نظر ثبت شده";
+            : total + " نظر — میانگین " +
+              average.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture) + " از ۵";
 
         EmptyText.IsVisible = _items.Count == 0;
     }
