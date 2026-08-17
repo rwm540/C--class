@@ -3,35 +3,178 @@
              x:Class="DentalCenter.App"
              RequestedThemeVariant="Light">
 
+    <Application.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.ThemeDictionaries>
+
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="DcBackgroundBrush" Color="#EEF2F7"/>
+                    <SolidColorBrush x:Key="DcSurfaceBrush"       Color="#FFFFFF"/>
+                    <SolidColorBrush x:Key="DcSurfaceAltBrush"    Color="#F3F6FA"/>
+                    <SolidColorBrush x:Key="DcBorderBrush"        Color="#E1E8F0"/>
+                    <SolidColorBrush x:Key="DcBrandBrush"         Color="#1976D2"/>
+                    <SolidColorBrush x:Key="DcBrandDarkBrush"     Color="#0D47A1"/>
+                    <SolidColorBrush x:Key="DcBrandLightBrush"    Color="#E3F2FD"/>
+                    <SolidColorBrush x:Key="DcTextBrush"          Color="#17222E"/>
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="DcBackgroundBrush" Color="#0E1621"/>
+                    <SolidColorBrush x:Key="DcSurfaceBrush"       Color="#15202B"/>
+                    <SolidColorBrush x:Key="DcSurfaceAltBrush"    Color="#1B2836"/>
+                    <SolidColorBrush x:Key="DcBorderBrush"        Color="#2A3947"/>
+                    <SolidColorBrush x:Key="DcBrandBrush"         Color="#64B5F6"/>
+                    <SolidColorBrush x:Key="DcBrandDarkBrush"     Color="#90CAF9"/>
+                    <SolidColorBrush x:Key="DcBrandLightBrush"    Color="#12293D"/>
+                    <SolidColorBrush x:Key="DcTextBrush"          Color="#E8EEF5"/>
+                </ResourceDictionary>
+
+            </ResourceDictionary.ThemeDictionaries>
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+
     <Application.Styles>
 
         <FluentTheme/>
 
+        <!-- متن پیش‌فرض -->
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource DcTextBrush}"/>
+        </Style>
+
+        <!-- کارت -->
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="{DynamicResource DcSurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DcBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="18"/>
+        </Style>
+
+        <!-- دکمهٔ عمومی -->
         <Style Selector="Button">
-
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Margin" Value="0,5"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="CornerRadius" Value="11"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Background" Value="#F5F7FA"/>
-            <Setter Property="Foreground" Value="#263238"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Padding" Value="15,0"/>
-
+            <Setter Property="Padding" Value="16,0"/>
+            <Setter Property="Background" Value="{DynamicResource DcSurfaceAltBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource DcTextBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DcBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
         </Style>
 
-        <Style Selector="Button:pointerover">
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource DcBrandLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DcBrandBrush}"/>
+        </Style>
 
-            <Setter Property="Background" Value="#2196F3"/>
+        <!-- دکمهٔ اصلی -->
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="{DynamicResource DcBrandBrush}"/>
             <Setter Property="Foreground" Value="White"/>
-
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
 
-        <Style Selector="Button:pressed">
+        <Style Selector="Button.primary /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource DcBrandBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
-            <Setter Property="Background" Value="#1565C0"/>
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource DcBrandDarkBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
+        <!-- دکمه‌های نوار عنوان -->
+        <Style Selector="Button.header">
+            <Setter Property="Background" Value="#33FFFFFF"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+
+        <Style Selector="Button.header /template/ ContentPresenter">
+            <Setter Property="Background" Value="#33FFFFFF"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.header:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#55FFFFFF"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- دکمه‌های منوی کناری -->
+        <Style Selector="Button.nav">
+            <Setter Property="Height" Value="46"/>
+            <Setter Property="FontSize" Value="14.5"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="14,0"/>
+        </Style>
+
+        <Style Selector="Button.nav /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="11"/>
+        </Style>
+
+        <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource DcBrandLightBrush}"/>
+        </Style>
+
+        <Style Selector="Button.nav.selected /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource DcBrandBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- فهرست موضوع‌ها در صفحات جزئیات -->
+        <Style Selector="ListBox.topics ListBoxItem">
+            <Setter Property="Padding" Value="12,11"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+            <Setter Property="CornerRadius" Value="11"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="ListBox.topics ListBoxItem:selected /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource DcBrandBrush}"/>
+            <Setter Property="CornerRadius" Value="11"/>
+        </Style>
+
+        <Style Selector="ListBox.topics ListBoxItem:selected TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- ورودی‌ها -->
+        <Style Selector="TextBox">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="12,9"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="MinHeight" Value="40"/>
+        </Style>
+
+        <Style Selector="ComboBox">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style Selector="NumericUpDown">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style Selector="CheckBox">
+            <Setter Property="FontSize" Value="13.5"/>
         </Style>
 
     </Application.Styles>

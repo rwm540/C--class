@@ -1,26 +1,88 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Layout;
+using Avalonia.Media;
+using Avalonia.Styling;
+using DentalCenter.Data;
 using DentalCenter.Views;
 
 namespace DentalCenter;
 
 public partial class MainWindow : Window
 {
+    private sealed record NavItem(string Icon, string Title, Func<Control> Factory);
+
+    private readonly List<Button> _navButtons = new();
+
+    private static readonly NavItem[] Items =
+    {
+        new("🏠", "صفحه اصلی", () => new HomeView()),
+        new("🦷", "تجهیزات", () => new EquipmentView()),
+        new("🏢", "فضای فیزیکی", () => new PhysicalView()),
+        new("💡", "بهره‌وری انرژی", () => new EnergyView()),
+        new("👶", "بخش کودکان", () => new ChildrenView()),
+        new("🧮", "محاسبهٔ انرژی", () => new CalculatorView()),
+        new("☎", "تماس با ما", () => new ContactView()),
+        new("📝", "ثبت نظرات", () => new FeedbackView())
+    };
+
     public MainWindow()
     {
         InitializeComponent();
 
-        ShowView(() => new HomeView());
+        HeaderTitle.Text = ContentData.ProjectTitle;
+        HeaderSubtitle.Text = ContentData.ProjectSubtitle;
+        FooterName.Text = ContentData.StudentName + " — " + ContentData.AcademicYear;
+        StatusRight.Text = "نسخهٔ ۲٫۰";
 
-        btnHome.Click += (_, _) => ShowView(() => new HomeView());
-        btnEquipment.Click += (_, _) => ShowView(() => new EquipmentView());
-        btnPhysical.Click += (_, _) => ShowView(() => new PhysicalView());
-        btnEnergy.Click += (_, _) => ShowView(() => new EnergyView());
-        btnChildren.Click += (_, _) => ShowView(() => new ChildrenView());
-        btnContact.Click += (_, _) => ShowView(() => new ContactView());
-        btnFeedback.Click += (_, _) => ShowView(() => new FeedbackView());
+        BuildNav();
+        Select(0);
+
+        btnTheme.Click += (_, _) => ToggleTheme();
+        btnAbout.Click += (_, _) => ShowAbout();
     }
 
+    private void BuildNav()
+    {
+        for (var i = 0; i < Items.Length; i++)
+        {
+            var index = i;
+            var item = Items[i];
+
+            var button = new Button
+            {
+                Classes = { "nav" },
+                Content = item.Icon + "   " + item.Title,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                HorizontalContentAlignment = HorizontalAlignment.Right
+            };
+
+            button.Click += (_, _) => Select(index);
+
+            _navButtons.Add(button);
+            NavPanel.Children.Add(button);
+        }
+    }
+
+    private void Select(int index)
+    {
+        for (var i = 0; i < _navButtons.Count; i++)
+        {
+            if (i == index)
+                _navButtons[i].Classes.Add("selected");
+            else
+                _navButtons[i].Classes.Remove("selected");
+        }
+
+        var item = Items[index];
+        StatusLeft.Text = item.Icon + "  " + item.Title;
+        ShowView(item.Factory);
+    }
+
+    /// <summary>ساخت و نمایش صفحه؛ خطای یک صفحه نباید کل برنامه را از کار بیندازد.</summary>
     private void ShowView(Func<Control> factory)
     {
         try
@@ -29,12 +91,77 @@ public partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            MainContent.Content = new TextBlock
+            Program.LogCrash("View", ex);
+
+            MainContent.Content = new StackPanel
             {
-                Text = "این صفحه الان قابل نمایش نیست.\n\n" + ex.Message,
-                TextWrapping = Avalonia.Media.TextWrapping.Wrap,
-                Margin = new Avalonia.Thickness(24)
+                Spacing = 10,
+                Margin = new Thickness(24),
+                Children =
+                {
+                    new TextBlock
+                    {
+                        Text = "این صفحه الان قابل نمایش نیست.",
+                        FontSize = 18,
+                        FontWeight = FontWeight.Bold
+                    },
+                    new TextBlock
+                    {
+                        Text = ex.Message,
+                        TextWrapping = TextWrapping.Wrap,
+                        Opacity = 0.75
+                    }
+                }
             };
         }
+    }
+
+    private void ToggleTheme()
+    {
+        var app = Application.Current;
+        if (app == null)
+            return;
+
+        var dark = app.ActualThemeVariant == ThemeVariant.Dark;
+        app.RequestedThemeVariant = dark ? ThemeVariant.Light : ThemeVariant.Dark;
+        btnTheme.Content = dark ? "🌙" : "☀";
+    }
+
+    private void ShowAbout()
+    {
+        var lines = new[]
+        {
+            ContentData.ProjectTitle,
+            "",
+            "دانشجو: " + ContentData.StudentName,
+            "استاد راهنما: " + ContentData.SupervisorName,
+            ContentData.University,
+            ContentData.AcademicYear,
+            "",
+            "ساخته‌شده با Avalonia UI و .NET"
+        };
+
+        var dialog = new Window
+        {
+            Title = "دربارهٔ برنامه",
+            Width = 520,
+            Height = 340,
+            CanResize = false,
+            FlowDirection = FlowDirection.RightToLeft,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            Content = new ScrollViewer
+            {
+                Padding = new Thickness(28),
+                Content = new TextBlock
+                {
+                    Text = string.Join(Environment.NewLine, lines),
+                    FontSize = 15,
+                    LineHeight = 30,
+                    TextWrapping = TextWrapping.Wrap
+                }
+            }
+        };
+
+        dialog.ShowDialog(this);
     }
 }

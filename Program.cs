@@ -3,6 +3,9 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Media;
+using Avalonia.Media.Fonts;
+
 
 namespace DentalCenter;
 
@@ -37,7 +40,24 @@ class Program
             .WithDeveloperTools()
 #endif
             .WithInterFont()
+            .With(new FontManagerOptions
+            {
+                // فونت فارسی همراه برنامه؛ روی سیستمی که وزیرمتن ندارد هم متن درست نمایش داده می‌شود.
+                DefaultFamilyName = VazirmatnFamily,
+                FontFallbacks = new[]
+                {
+                    new FontFallback { FontFamily = new FontFamily(VazirmatnFamily) },
+                    new FontFallback { FontFamily = new FontFamily("Segoe UI Emoji") },
+                    new FontFallback { FontFamily = new FontFamily("Segoe UI Symbol") },
+                    new FontFallback { FontFamily = new FontFamily("Tahoma") },
+                    new FontFallback { FontFamily = new FontFamily("Segoe UI") }
+                }
+            })
             .LogToTrace();
+
+    /// <summary>خانوادهٔ فونت وزیرمتن که داخل اسمبلی جاسازی شده است.</summary>
+    private const string VazirmatnFamily =
+        "avares://DentalCenter/Assets/Fonts#Vazirmatn";
 
     internal static void LogCrash(string source, Exception? ex)
     {

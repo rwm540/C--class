@@ -1,73 +1,8 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:DentalCenter.Controls"
              x:Class="DentalCenter.Views.PhysicalView">
 
-    <Grid>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <!-- منوی سمت چپ -->
-
-        <Border Background="#ECEFF1">
-
-            <StackPanel Margin="15" Spacing="10">
-
-                <TextBlock Text="فضای فیزیکی"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"/>
-
-                <Button x:Name="btnRoom"
-                        Content="🦷 اتاق یونیت"/>
-
-                <Button x:Name="btnWaiting"
-                        Content="🪑 اتاق انتظار"/>
-
-                <Button x:Name="btnReception"
-                        Content="💻 پذیرش"/>
-
-                <Button x:Name="btnImaging"
-                        Content="📷 تصویربرداری"/>
-
-                <Button x:Name="btnService"
-                        Content="🚻 سرویس"/>
-
-            </StackPanel>
-
-        </Border>
-
-        <!-- نمایش اطلاعات -->
-
-        <Border Grid.Column="1"
-                Background="White"
-                Padding="20">
-
-            <StackPanel>
-
-                <Image x:Name="RoomImage"
-                       Height="300"/>
-
-                <TextBlock x:Name="RoomTitle"
-                           FontSize="28"
-                           FontWeight="Bold"
-                           Margin="0,20,0,10"/>
-
-                <TextBlock x:Name="RoomDescription"
-                           TextWrapping="Wrap"
-                           FontSize="18"/>
-
-                <Button x:Name="btnPdf"
-                        Width="220"
-                        Margin="0,20,0,0"
-                        Content="📄 مشاهده PDF"/>
-
-            </StackPanel>
-
-        </Border>
-
-    </Grid>
+    <controls:DetailPageView x:Name="Detail"/>
 
 </UserControl>

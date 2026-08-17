@@ -17,6 +17,9 @@
     <PublishReadyToRun>false</PublishReadyToRun>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
     <DebugType>embedded</DebugType>
+    <!-- بایندینگ‌های این پروژه از نوع reflection هستند؛ صریح مشخص می‌کنیم تا با تغییر پیش‌فرض قالب‌ها نشکند. -->
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+    <AvaloniaNameGeneratorIsEnabled>true</AvaloniaNameGeneratorIsEnabled>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- تصاویر، فونت‌ها و PDFها داخل خود اسمبلی جاسازی می‌شوند تا exe تک‌فایل هم کامل باشد. -->
     <AvaloniaResource Include="Assets\**" />
     <Content Include="HOW-TO-RUN.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

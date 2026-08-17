@@ -1,28 +1,121 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="DentalCenter.Views.ContactView">
+             x:Class="DentalCenter.Views.ContactView"
+             FlowDirection="RightToLeft">
 
-    <StackPanel Margin="40" Spacing="15">
+    <ScrollViewer>
 
-        <TextBlock
-            Text="تماس با ما"
-            FontSize="30"
-            FontWeight="Bold"/>
+        <StackPanel Spacing="16" Margin="4" MaxWidth="900" HorizontalAlignment="Stretch">
 
-        <Separator/>
+            <TextBlock Text="تماس با ما"
+                       FontSize="24"
+                       FontWeight="Bold"/>
 
-        <TextBlock Text="استاد راهنما"/>
-        <TextBox Watermark="نام استاد"/>
-        <TextBox Watermark="ایمیل"/>
-        <TextBox Watermark="شماره تماس"/>
+            <TextBlock Text="اطلاعات تماس دست‌اندرکاران پروژه. برای کپی کردن هر مورد، روی دکمهٔ کنار آن کلیک کنید."
+                       FontSize="13.5"
+                       Opacity="0.7"
+                       LineHeight="24"
+                       TextWrapping="Wrap"/>
 
-        <Separator/>
+            <ItemsControl x:Name="ContactList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Classes="card" Margin="0,0,0,12">
+                            <Grid ColumnDefinitions="Auto,*">
 
-        <TextBlock Text="دانشجو"/>
-        <TextBox Watermark="نام دانشجو"/>
-        <TextBox Watermark="ایمیل"/>
-        <TextBox Watermark="شماره تماس"/>
+                                <Border Grid.Column="0"
+                                        Width="58" Height="58"
+                                        CornerRadius="29"
+                                        VerticalAlignment="Top"
+                                        Background="{DynamicResource DcBrandLightBrush}">
+                                    <TextBlock Text="{Binding Icon}"
+                                               FontSize="26"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+                                </Border>
 
-    </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="14,0,0,0" Spacing="7">
+
+                                    <TextBlock Text="{Binding Role}"
+                                               FontSize="12.5"
+                                               Opacity="0.6"/>
+
+                                    <TextBlock Text="{Binding Name}"
+                                               FontSize="17"
+                                               FontWeight="Bold"/>
+
+                                    <Grid ColumnDefinitions="Auto,*,Auto">
+                                        <TextBlock Grid.Column="0" Text="✉" FontSize="14" Opacity="0.6"/>
+                                        <TextBlock Grid.Column="1"
+                                                   Margin="8,0,0,0"
+                                                   Text="{Binding Email}"
+                                                   FontSize="14"
+                                                   FlowDirection="LeftToRight"
+                                                   HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"/>
+                                        <Button Grid.Column="2"
+                                                Content="کپی"
+                                                FontSize="12"
+                                                Height="30"
+                                                Padding="12,0"
+                                                Tag="{Binding Email}"
+                                                Click="OnCopyClick"/>
+                                    </Grid>
+
+                                    <Grid ColumnDefinitions="Auto,*,Auto">
+                                        <TextBlock Grid.Column="0" Text="☎" FontSize="14" Opacity="0.6"/>
+                                        <TextBlock Grid.Column="1"
+                                                   Margin="8,0,0,0"
+                                                   Text="{Binding Phone}"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"/>
+                                        <Button Grid.Column="2"
+                                                Content="کپی"
+                                                FontSize="12"
+                                                Height="30"
+                                                Padding="12,0"
+                                                Tag="{Binding Phone}"
+                                                Click="OnCopyClick"/>
+                                    </Grid>
+
+                                </StackPanel>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Border Classes="card">
+                <StackPanel Spacing="10">
+
+                    <TextBlock Text="اطلاعات پروژه"
+                               FontSize="17"
+                               FontWeight="Bold"/>
+
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" >
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="عنوان:" Opacity="0.6" FontSize="13.5" Margin="0,0,10,6"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TitleText" FontSize="13.5" TextWrapping="Wrap" Margin="0,0,0,6"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="دانشگاه:" Opacity="0.6" FontSize="13.5" Margin="0,0,10,6"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="UniversityText" FontSize="13.5" Margin="0,0,0,6"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="سال:" Opacity="0.6" FontSize="13.5" Margin="0,0,10,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="YearText" FontSize="13.5"/>
+
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Name="CopyStatus"
+                       FontSize="13"
+                       Foreground="#2E7D32"
+                       IsVisible="False"/>
+
+        </StackPanel>
+
+    </ScrollViewer>
 
 </UserControl>
