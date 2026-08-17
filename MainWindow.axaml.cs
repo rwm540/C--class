@@ -27,7 +27,7 @@ public partial class MainWindow : Window
         new("🧮", "محاسبهٔ انرژی", () => new CalculatorView()),
         new("☎", "تماس با ما", () => new ContactView()),
         new("📝", "ثبت نظرات", () => new FeedbackView()),
-        new("💬", "نمایش نظرات", () => new CommentsView())
+        new("💬", "نظرات و پیام‌ها", () => new CommentsView())
     };
 
     public MainWindow()

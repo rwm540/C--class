@@ -31,6 +31,7 @@ public sealed class RatingBar
 public partial class CommentsView : UserControl
 {
     private readonly ObservableCollection<Feedback> _items = new();
+    private readonly ObservableCollection<ContactMessage> _messages = new();
 
     public CommentsView()
     {
@@ -43,7 +44,33 @@ public partial class CommentsView : UserControl
         SearchBox.TextChanged += (_, _) => Reload();
         FilterBox.SelectionChanged += (_, _) => Reload();
 
+        MessageList.ItemsSource = _messages;
+        btnRefreshMessages.Click += (_, _) => ReloadMessages();
+        btnClearMessages.Click += (_, _) => ClearMessages();
+
         Reload();
+        ReloadMessages();
+    }
+
+    /// <summary>بارگذاری پیام‌های فرم «تماس با ما» از پایگاه داده.</summary>
+    private void ReloadMessages()
+    {
+        _messages.Clear();
+        foreach (var message in ContactStore.Load())
+            _messages.Add(message);
+
+        MessageCountText.Text = _messages.Count == 0
+            ? "پیام‌های تماس"
+            : _messages.Count + " پیام دریافت شده";
+
+        EmptyMessagesPanel.IsVisible = _messages.Count == 0;
+        btnClearMessages.IsEnabled = _messages.Count > 0;
+    }
+
+    private void ClearMessages()
+    {
+        if (_messages.Count > 0 && ContactStore.Clear())
+            ReloadMessages();
     }
 
     private void Reload()
