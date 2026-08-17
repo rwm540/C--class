@@ -2,27 +2,32 @@ name: Build Windows EXE
 
 on:
   push:
-    branches:
-      - arena/01a010af-c-class
+    branches: ["**"]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Setup .NET
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            10.0.x
-          dotnet-quality: preview
+          dotnet-version: 10.0.x
+
+      - name: Show SDK version
+        run: dotnet --info
 
       - name: Restore
         run: dotnet restore DentalCenter.csproj -r win-x64
 
-      - name: Publish single-file exe
+      - name: Publish single-file self-contained exe
         run: >
           dotnet publish DentalCenter.csproj
           -c Release
@@ -30,16 +35,27 @@ jobs:
           --self-contained true
           -p:PublishSingleFile=true
           -p:IncludeNativeLibrariesForSelfExtract=true
-          -p:EnableWindowsTargeting=true
+          -p:DebugType=none
           -o publish
 
       - name: List output
         shell: pwsh
-        run: Get-ChildItem publish | Format-Table Name,Length
+        run: Get-ChildItem publish -Recurse | Select-Object Name,Length | Format-Table
 
-      - name: Upload artifact
+      - name: Upload artifact (DentalCenter.exe)
         uses: actions/upload-artifact@v4
         with:
           name: DentalCenter-win-x64
-          path: publish/**
+          path: publish/DentalCenter.exe
           if-no-files-found: error
+
+      - name: Publish downloadable release
+        if: github.ref == 'refs/heads/arena/01a010af-c-class' || github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: win-build-${{ github.run_number }}
+          name: DentalCenter Windows build #${{ github.run_number }}
+          body: |
+            Windows x64 single-file self-contained build.
+            Commit: ${{ github.sha }}
+          files: publish/DentalCenter.exe
