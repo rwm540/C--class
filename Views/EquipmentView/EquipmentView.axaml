@@ -1,0 +1,80 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="DentalCenter.Views.EquipmentView">
+
+    <Grid Margin="15">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- زیرمنو -->
+        <Border Grid.Column="0"
+                Background="#F3F6FA"
+                CornerRadius="10"
+                Padding="10">
+
+            <StackPanel Spacing="8">
+
+                <TextBlock
+                    Text="تجهیزات مرکز"
+                    FontWeight="Bold"
+                    FontSize="20"
+                    HorizontalAlignment="Center"
+                    Margin="0 0 0 10"/>
+
+                <Button x:Name="btnUnit"
+                        Content="🦷 یونیت"/>
+
+                <Button x:Name="btnRadio"
+                        Content="📷 رادیوگرافی"/>
+
+                <Button x:Name="btnMaterial"
+                        Content="🧪 تهیه مواد"/>
+
+                <Button x:Name="btnCompressor"
+                        Content="💨 کمپرسور"/>
+
+                <Button x:Name="btnAutoclave"
+                        Content="♨ اتوکلاو"/>
+
+            </StackPanel>
+
+        </Border>
+
+        <!-- محتوا -->
+
+        <ScrollViewer Grid.Column="1"
+                      Margin="15 0 0 0">
+
+            <StackPanel Spacing="15">
+
+                <TextBlock
+                    x:Name="EquipmentTitle"
+                    FontSize="26"
+                    FontWeight="Bold"/>
+
+                <Image
+                    x:Name="EquipmentImage"
+                    Height="260"
+                    Stretch="Uniform"/>
+
+                <TextBlock
+                    x:Name="EquipmentDescription"
+                    FontSize="16"
+                    TextWrapping="Wrap"/>
+
+                <Button
+                    x:Name="btnPdf"
+                    Width="180"
+                    Height="40"
+                    Content="📄 مشاهده PDF"/>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Grid>
+
+</UserControl>

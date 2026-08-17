@@ -1,0 +1,16 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="DentalCenter.Views.ChildrenView">
+
+    <Grid Background="#F8F9FA">
+
+        <TextBlock
+            Text="👶 بخش کودکان"
+            FontSize="28"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"/>
+
+    </Grid>
+
+</UserControl>

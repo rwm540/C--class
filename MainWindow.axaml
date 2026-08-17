@@ -1,0 +1,98 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="DentalCenter.MainWindow"
+        Width="1350"
+        Height="760"
+        Title="Dental Center">
+
+<Grid Background="#F5F7FA">
+
+<Grid.RowDefinitions>
+
+<RowDefinition Height="70"/>
+
+<RowDefinition Height="*"/>
+
+</Grid.RowDefinitions>
+
+<Grid.ColumnDefinitions>
+
+<ColumnDefinition Width="250"/>
+
+<ColumnDefinition Width="*"/>
+
+</Grid.ColumnDefinitions>
+
+<Border Grid.Row="0"
+Grid.ColumnSpan="2"
+Background="#1976D2">
+
+<TextBlock
+
+Text="طراحی ساختمان مرکز دندانپزشکی با رویکرد بهره‌وری انرژی"
+
+Foreground="White"
+
+FontSize="28"
+
+FontWeight="Bold"
+
+HorizontalAlignment="Center"
+
+VerticalAlignment="Center"/>
+
+</Border>
+
+<Border Grid.Row="1"
+Grid.Column="0"
+Background="#ECEFF1">
+
+<StackPanel Margin="15"
+Spacing="10">
+
+<Button x:Name="btnHome"
+Content="🏠 صفحه اصلی"
+Height="55"/>
+
+<Button x:Name="btnEquipment"
+Content="🦷 تجهیزات"
+Height="55"/>
+
+<Button x:Name="btnPhysical"
+Content="🏢 فضای فیزیکی"
+Height="55"/>
+
+<Button x:Name="btnEnergy"
+Content="💡 بهره‌وری انرژی"
+Height="55"/>
+
+<Button x:Name="btnChildren"
+Content="👶 بخش کودکان"
+Height="55"/>
+
+<Button x:Name="btnContact"
+Content="☎ تماس با ما"
+Height="55"/>
+
+<Button x:Name="btnFeedback"
+Content="📝 ثبت نظرات"
+Height="55"/>
+
+</StackPanel>
+
+</Border>
+
+<Border Grid.Row="1"
+Grid.Column="1"
+Margin="15"
+CornerRadius="15"
+Background="White">
+
+<ContentControl
+x:Name="MainContent"/>
+
+</Border>
+
+</Grid>
+
+</Window>

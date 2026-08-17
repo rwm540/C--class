@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="DentalCenter.Views.FeedbackView">
+
+    <StackPanel Margin="40" Spacing="15">
+
+        <TextBlock
+            Text="ثبت نظرات"
+            FontSize="30"
+            FontWeight="Bold"/>
+
+        <TextBox Watermark="نام"/>
+
+        <TextBox Watermark="ایمیل"/>
+
+        <TextBox AcceptsReturn="True"
+                 Height="180"
+                 Watermark="نظر خود را وارد کنید"/>
+
+        <Button
+            Width="180"
+            Content="ثبت نظر"/>
+
+    </StackPanel>
+
+</UserControl>

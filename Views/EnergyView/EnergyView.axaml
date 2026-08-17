@@ -1,0 +1,76 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="DentalCenter.Views.EnergyView">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- منوی سمت چپ -->
+
+        <Border Background="#ECEFF1">
+
+            <StackPanel Margin="15" Spacing="10">
+
+                <TextBlock Text="بهره‌وری انرژی"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"/>
+
+                <Button x:Name="btnLight"
+                        Content="💡 روشنایی"/>
+
+                <Button x:Name="btnCooling"
+                        Content="❄ سرمایش"/>
+
+                <Button x:Name="btnHeating"
+                        Content="🔥 گرمایش"/>
+
+                <Button x:Name="btnVentilation"
+                        Content="🌬 تهویه"/>
+
+                <Button x:Name="btnWindow"
+                        Content="🪟 پنجره‌ها"/>
+
+                <Button x:Name="btnSolar"
+                        Content="☀ نور طبیعی"/>
+
+            </StackPanel>
+
+        </Border>
+
+        <!-- اطلاعات -->
+
+        <Border Grid.Column="1"
+                Background="White"
+                Padding="20">
+
+            <StackPanel>
+
+                <Image x:Name="EnergyImage"
+                       Height="300"/>
+
+                <TextBlock x:Name="EnergyTitle"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Margin="0,20,0,10"/>
+
+                <TextBlock x:Name="EnergyDescription"
+                           FontSize="18"
+                           TextWrapping="Wrap"/>
+
+                <Button x:Name="btnPdf"
+                        Width="220"
+                        Margin="0,20,0,0"
+                        Content="📄 مشاهده PDF"/>
+
+            </StackPanel>
+
+        </Border>
+
+    </Grid>
+
+</UserControl>

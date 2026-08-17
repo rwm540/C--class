@@ -1,0 +1,28 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="DentalCenter.Views.ContactView">
+
+    <StackPanel Margin="40" Spacing="15">
+
+        <TextBlock
+            Text="تماس با ما"
+            FontSize="30"
+            FontWeight="Bold"/>
+
+        <Separator/>
+
+        <TextBlock Text="استاد راهنما"/>
+        <TextBox Watermark="نام استاد"/>
+        <TextBox Watermark="ایمیل"/>
+        <TextBox Watermark="شماره تماس"/>
+
+        <Separator/>
+
+        <TextBlock Text="دانشجو"/>
+        <TextBox Watermark="نام دانشجو"/>
+        <TextBox Watermark="ایمیل"/>
+        <TextBox Watermark="شماره تماس"/>
+
+    </StackPanel>
+
+</UserControl>
