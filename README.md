@@ -81,4 +81,4 @@ light.pdf cooling.pdf heating.pdf ventilation.pdf window.pdf solar.pdf
 
 ## مجوز فونت
 
-فونت وزیرمتن تحت مجوز SIL Open Font License است — متن مجوز در `Assets/Fonts/OFL.txt`.
+فونت وزیرمتن تحت مجوز SIL Open Font License است — متن مجوز در `Docs/Vazirmatn-OFL.txt`.
