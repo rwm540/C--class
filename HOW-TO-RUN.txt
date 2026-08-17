@@ -1,15 +1,24 @@
-Dental Center — چطور برنامه را اجرا کنید
-========================================
+Dental Center — راهنمای اجرا
+================================
 
-روش درست (exe تک‌فایل که روی هر ویندوز باز می‌شود):
+روش ۱ (ساده‌ترین): دانلود exe آماده
+  https://github.com/rwm540/C--class/releases
+  آخرین نسخه win-build-* را باز کنید و DentalCenter.exe را دانلود و اجرا کنید.
+  نیازی به نصب .NET یا فونت فارسی نیست.
+
+روش ۲: ساخت روی سیستم خودتان (ویندوز، نیازمند .NET 10 SDK)
   PowerShell:
     ./build-exe.ps1
-  بعد فایل publish\DentalCenter.exe را اجرا کنید.
+  خروجی: publish\DentalCenter.exe
 
-اگر از Visual Studio فقط Build می‌گیرید:
-  DentalCenter.exe را از داخل همان پوشه bin\Debug\net10.0 (یا Release) اجرا کنید.
-  کل پوشه را با هم نگه دارید. فقط خودِ exe را به دسکتاپ کپی نکنید؛ بدون DLLها باز نمی‌شود.
+روش ۳: اجرا از Visual Studio
+  فقط دکمهٔ Run را بزنید.
+  اگر Build گرفتید، کل پوشهٔ bin\Debug\net10.0 را با هم نگه دارید؛
+  فقط خودِ exe را جدا کپی نکنید چون بدون DLLها باز نمی‌شود.
 
-اگر پنجره نیامد:
+اگر پنجره باز نشد:
   فایل DentalCenter-crash.log کنار exe
-  یا %LOCALAPPDATA%\DentalCenter\crash.log
+  یا %LOCALAPPDATA%\DentalCenter\crash.log را ببینید.
+
+داده‌های کاربر:
+  نظرات ثبت‌شده در %LOCALAPPDATA%\DentalCenter\feedback.json ذخیره می‌شود.

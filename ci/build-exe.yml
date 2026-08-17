@@ -3,6 +3,7 @@ name: Build Windows EXE
 on:
   push:
     branches: ["**"]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -26,6 +27,9 @@ jobs:
 
       - name: Restore
         run: dotnet restore DentalCenter.csproj -r win-x64
+
+      - name: Build (Release) — fails the job on any compile error
+        run: dotnet build DentalCenter.csproj -c Release -r win-x64 --no-restore
 
       - name: Publish single-file self-contained exe
         run: >
@@ -53,11 +57,11 @@ jobs:
           if-no-files-found: error
 
       - name: Publish downloadable release
-        if: github.ref == 'refs/heads/arena/01a010af-c-class' || github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/arena/'))
         uses: softprops/action-gh-release@v2
         with:
           tag_name: win-build-${{ github.run_number }}
-          name: DentalCenter Windows build #${{ github.run_number }}
+          name: DentalCenter Windows build ${{ github.run_number }}
           body: |
             Windows x64 single-file self-contained build.
             Commit: ${{ github.sha }}

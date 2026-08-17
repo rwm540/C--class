@@ -1,0 +1,213 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="DentalCenter.Views.CalculatorView"
+             FlowDirection="RightToLeft">
+
+    <ScrollViewer>
+
+        <StackPanel Spacing="16" Margin="4">
+
+            <TextBlock Text="🧮  برآورد مصرف و صرفه‌جویی انرژی"
+                       FontSize="24"
+                       FontWeight="Bold"/>
+
+            <TextBlock Text="با وارد کردن مشخصات مرکز، مصرف تقریبی سالانه و میزان صرفه‌جویی حاصل از راهکارهای بهره‌وری محاسبه می‌شود. اعداد تخمینی و برای مقایسهٔ سناریوها هستند."
+                       FontSize="13.5"
+                       Opacity="0.7"
+                       LineHeight="24"
+                       TextWrapping="Wrap"/>
+
+            <Grid ColumnDefinitions="*,*">
+
+                <!-- ورودی‌ها -->
+                <Border Grid.Column="0" Classes="card" Margin="0,0,8,0">
+                    <StackPanel Spacing="14">
+
+                        <TextBlock Text="مشخصات مرکز" FontSize="17" FontWeight="Bold"/>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="زیربنا (مترمربع)" FontSize="12.5" Opacity="0.7"/>
+                            <NumericUpDown x:Name="AreaBox"
+                                           Minimum="20" Maximum="5000"
+                                           Increment="10"
+                                           Value="200"
+                                           FormatString="0"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="تعداد یونیت دندانپزشکی" FontSize="12.5" Opacity="0.7"/>
+                            <NumericUpDown x:Name="UnitsBox"
+                                           Minimum="1" Maximum="50"
+                                           Increment="1"
+                                           Value="4"
+                                           FormatString="0"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="ساعت کار روزانه" FontSize="12.5" Opacity="0.7"/>
+                            <NumericUpDown x:Name="HoursBox"
+                                           Minimum="1" Maximum="24"
+                                           Increment="1"
+                                           Value="10"
+                                           FormatString="0"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="روزهای کاری در سال" FontSize="12.5" Opacity="0.7"/>
+                            <NumericUpDown x:Name="DaysBox"
+                                           Minimum="50" Maximum="365"
+                                           Increment="5"
+                                           Value="290"
+                                           FormatString="0"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="تعرفهٔ برق (تومان بر کیلووات‌ساعت)" FontSize="12.5" Opacity="0.7"/>
+                            <NumericUpDown x:Name="TariffBox"
+                                           Minimum="100" Maximum="20000"
+                                           Increment="100"
+                                           Value="1500"
+                                           FormatString="0"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+
+                <!-- راهکارها -->
+                <Border Grid.Column="1" Classes="card" Margin="8,0,0,0">
+                    <StackPanel Spacing="12">
+
+                        <TextBlock Text="راهکارهای بهره‌وری" FontSize="17" FontWeight="Bold"/>
+
+                        <TextBlock Text="هر گزینه را که در طرح اعمال می‌کنید تیک بزنید."
+                                   FontSize="12.5" Opacity="0.65" TextWrapping="Wrap"/>
+
+                        <CheckBox x:Name="ChkLed" IsChecked="True"
+                                  Content="روشنایی LED به‌جای لامپ معمولی"/>
+                        <CheckBox x:Name="ChkSensor" IsChecked="True"
+                                  Content="سنسور حضور و حسگر نور روز"/>
+                        <CheckBox x:Name="ChkVrf"
+                                  Content="سیستم VRF یا اسپلیت اینورتر"/>
+                        <CheckBox x:Name="ChkInsulation"
+                                  Content="عایق‌کاری جداره و پنجرهٔ دوجدارهٔ Low-E"/>
+                        <CheckBox x:Name="ChkHrv"
+                                  Content="سیستم بازیافت حرارت در تهویه"/>
+                        <CheckBox x:Name="ChkVsd"
+                                  Content="کمپرسور با درایو دور متغیر (VSD)"/>
+                        <CheckBox x:Name="ChkSolar"
+                                  Content="پنل خورشیدی روی بام"/>
+
+                        <StackPanel Spacing="4" Margin="24,4,0,0">
+                            <TextBlock x:Name="SolarLabel"
+                                       Text="توان نصب‌شدهٔ پنل خورشیدی (کیلووات)"
+                                       FontSize="12.5" Opacity="0.7"/>
+                            <NumericUpDown x:Name="SolarBox"
+                                           Minimum="0" Maximum="200"
+                                           Increment="1"
+                                           Value="10"
+                                           FormatString="0"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+            <Button x:Name="btnCalculate"
+                    Classes="primary"
+                    Content="محاسبهٔ دوباره"
+                    Width="180"
+                    HorizontalAlignment="Center"
+                    ToolTip.Tip="نتیجه با هر تغییر ورودی به‌صورت خودکار به‌روز می‌شود."/>
+
+            <!-- نتیجه -->
+            <UniformGrid Columns="4">
+
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="3" HorizontalAlignment="Center">
+                        <TextBlock Text="مصرف پایه (سالانه)" FontSize="12" Opacity="0.65" TextAlignment="Center"/>
+                        <TextBlock x:Name="BaseText" FontSize="21" FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="کیلووات‌ساعت" FontSize="11.5" Opacity="0.55"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="3" HorizontalAlignment="Center">
+                        <TextBlock Text="مصرف بهینه‌شده" FontSize="12" Opacity="0.65" TextAlignment="Center"/>
+                        <TextBlock x:Name="OptimizedText" FontSize="21" FontWeight="Bold"
+                                   Foreground="#2E7D32"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="کیلووات‌ساعت" FontSize="11.5" Opacity="0.55"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="3" HorizontalAlignment="Center">
+                        <TextBlock Text="کاهش مصرف" FontSize="12" Opacity="0.65" TextAlignment="Center"/>
+                        <TextBlock x:Name="SavingPercentText" FontSize="21" FontWeight="Bold"
+                                   Foreground="{DynamicResource DcBrandBrush}"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="درصد" FontSize="11.5" Opacity="0.55"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="3" HorizontalAlignment="Center">
+                        <TextBlock Text="صرفه‌جویی مالی" FontSize="12" Opacity="0.65" TextAlignment="Center"/>
+                        <TextBlock x:Name="SavingMoneyText" FontSize="19" FontWeight="Bold"
+                                   Foreground="#2E7D32"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="تومان در سال" FontSize="11.5" Opacity="0.55"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+            </UniformGrid>
+
+            <Border Classes="card">
+                <StackPanel Spacing="10">
+
+                    <TextBlock Text="سهم هر بخش از مصرف بهینه‌شده"
+                               FontSize="16" FontWeight="Bold"/>
+
+                    <ItemsControl x:Name="BreakdownList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Spacing="4" Margin="0,0,0,10">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <TextBlock Grid.Column="0" Text="{Binding Label}" FontSize="13.5"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding ValueText}"
+                                                   FontSize="13" FontWeight="SemiBold" Opacity="0.8"/>
+                                    </Grid>
+                                    <Border Height="10" CornerRadius="5"
+                                            Background="{DynamicResource DcBorderBrush}">
+                                        <Border HorizontalAlignment="Right"
+                                                Width="{Binding BarWidth}"
+                                                CornerRadius="5"
+                                                Background="{DynamicResource DcBrandBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </StackPanel>
+            </Border>
+
+            <Border CornerRadius="12" Background="#FFF8E1" Padding="16">
+                <TextBlock Text="این محاسبه بر پایهٔ شاخص‌های تجربی مصرف در مراکز درمانی کوچک انجام می‌شود و جایگزین محاسبات دقیق تأسیساتی نیست."
+                           FontSize="12.5"
+                           Foreground="#8D6E00"
+                           LineHeight="24"
+                           TextWrapping="Wrap"/>
+            </Border>
+
+        </StackPanel>
+
+    </ScrollViewer>
+
+</UserControl>

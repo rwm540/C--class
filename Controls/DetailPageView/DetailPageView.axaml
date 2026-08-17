@@ -1,8 +1,178 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="DentalCenter.DetailPageView">
-  Welcome to Avalonia!
+             x:Class="DentalCenter.Controls.DetailPageView"
+             FlowDirection="RightToLeft">
+
+    <Grid ColumnDefinitions="230,*">
+
+        <!-- ستون فهرست موضوع‌ها -->
+        <Border Grid.Column="0"
+                Background="{DynamicResource DcSurfaceAltBrush}"
+                CornerRadius="14"
+                Padding="10">
+
+            <DockPanel>
+
+                <StackPanel DockPanel.Dock="Top" Margin="4,4,4,10">
+                    <TextBlock x:Name="SectionTitle"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap"
+                               Foreground="{DynamicResource DcBrandDarkBrush}"/>
+                    <Rectangle Height="2"
+                               Margin="0,8,0,0"
+                               Fill="{DynamicResource DcBrandBrush}"
+                               Opacity="0.35"/>
+                </StackPanel>
+
+                <ListBox x:Name="TopicList"
+                         Classes="topics"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         Padding="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         SelectionChanged="OnTopicChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ButtonText}"
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </DockPanel>
+
+        </Border>
+
+        <!-- ستون محتوا -->
+        <ScrollViewer Grid.Column="1" Margin="16,0,0,0">
+
+            <StackPanel Spacing="14">
+
+                <TextBlock x:Name="TopicTitle"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"/>
+
+                <TextBlock x:Name="TopicSummary"
+                           FontSize="15"
+                           Opacity="0.8"
+                           LineHeight="26"
+                           TextWrapping="Wrap"/>
+
+                <Border CornerRadius="14"
+                        ClipToBounds="True"
+                        Height="290"
+                        Background="{DynamicResource DcBrandLightBrush}">
+                    <Panel>
+                        <TextBlock x:Name="ImageFallback"
+                                   Text="تصویر در دسترس نیست"
+                                   Opacity="0.5"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                        <Image x:Name="TopicImage"
+                               Stretch="UniformToFill"
+                               FlowDirection="LeftToRight"/>
+                    </Panel>
+                </Border>
+
+                <TextBlock Text="نکات کلیدی طراحی"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Margin="0,8,0,0"/>
+
+                <ItemsControl x:Name="BulletList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,7">
+                                <Ellipse Grid.Column="0"
+                                         Width="7" Height="7"
+                                         Margin="0,10,0,0"
+                                         VerticalAlignment="Top"
+                                         Fill="{DynamicResource DcBrandBrush}"/>
+                                <TextBlock Grid.Column="1"
+                                           Margin="10,0,0,0"
+                                           Text="{Binding}"
+                                           FontSize="15"
+                                           LineHeight="26"
+                                           TextWrapping="Wrap"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <TextBlock Text="مشخصات فنی"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Margin="0,8,0,0"/>
+
+                <Border CornerRadius="12"
+                        ClipToBounds="True"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource DcBorderBrush}">
+                    <ItemsControl x:Name="SpecList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="14,10"
+                                        BorderThickness="0,0,0,1"
+                                        BorderBrush="{DynamicResource DcBorderBrush}">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <TextBlock Grid.Column="0"
+                                                   Text="{Binding Key}"
+                                                   FontSize="14"
+                                                   Opacity="0.75"/>
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding Value}"
+                                                   FontSize="14"
+                                                   FontWeight="SemiBold"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Border>
+
+                <Border CornerRadius="12"
+                        Background="#E8F5E9"
+                        Padding="16"
+                        Margin="0,8,0,0">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <TextBlock Grid.Column="0"
+                                   Text="🌱"
+                                   FontSize="22"
+                                   VerticalAlignment="Top"/>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" Spacing="4">
+                            <TextBlock Text="نکتهٔ بهره‌وری انرژی"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       Foreground="#1B5E20"/>
+                            <TextBlock x:Name="EnergyNote"
+                                       FontSize="14"
+                                       LineHeight="24"
+                                       Foreground="#1B5E20"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,6,0,10">
+                    <Button x:Name="btnPdf"
+                            Classes="primary"
+                            Content="📄  مشاهده PDF"
+                            Width="170"/>
+                    <TextBlock x:Name="PdfHint"
+                               VerticalAlignment="Center"
+                               FontSize="12.5"
+                               Opacity="0.65"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Grid>
+
 </UserControl>

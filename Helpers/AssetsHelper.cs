@@ -92,6 +92,32 @@ public static class AssetsHelper
         return null;
     }
 
+    /// <summary>آیا فایل PDF موردنظر روی دیسک یا داخل اسمبلی موجود است؟</summary>
+    public static bool PdfExists(string relative)
+    {
+        if (string.IsNullOrWhiteSpace(relative))
+            return false;
+
+        relative = relative.Replace('\\', '/').TrimStart('/');
+
+        var onDisk = FirstExisting(
+            Path.Combine(AppDirectory, "Assets", "PDF", relative),
+            Path.Combine(AppContext.BaseDirectory, "Assets", "PDF", relative),
+            Path.Combine(RootPath, "Assets", "PDF", relative));
+
+        if (onDisk != null)
+            return true;
+
+        try
+        {
+            return AssetLoader.Exists(new Uri($"avares://{AssemblyName}/Assets/PDF/{relative}"));
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     public static void OpenPdf(string relative)
     {
         if (string.IsNullOrWhiteSpace(relative))

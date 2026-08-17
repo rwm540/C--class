@@ -1,63 +1,204 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="DentalCenter.Views.HomeView">
+             x:Class="DentalCenter.Views.HomeView"
+             FlowDirection="RightToLeft">
 
-    <Grid Background="#F5F7FA">
+    <ScrollViewer>
 
-        <Border
-            Width="850"
-            MaxWidth="920"
-            Background="White"
-            CornerRadius="20"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Padding="30">
+        <StackPanel Spacing="18" Margin="4">
 
-            <StackPanel Spacing="20">
+            <!-- تصویر شاخص -->
+            <Border CornerRadius="16"
+                    ClipToBounds="True"
+                    Height="300"
+                    Background="{DynamicResource DcBrandLightBrush}">
+                <Panel>
 
-                <Border Height="300"
-                        CornerRadius="12"
-                        Background="#E3F2FD"
-                        ClipToBounds="True">
-                    <Panel>
-                        <TextBlock Text="🦷"
-                                   FontSize="72"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                        <Image x:Name="HeroImage"
-                               Stretch="UniformToFill"/>
-                    </Panel>
+                    <TextBlock Text="🦷"
+                               FontSize="80"
+                               Opacity="0.35"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+
+                    <Image x:Name="HeroImage"
+                           Stretch="UniformToFill"
+                           FlowDirection="LeftToRight"/>
+
+                    <Border VerticalAlignment="Bottom" Height="130">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                <GradientStop Offset="0" Color="#00000000"/>
+                                <GradientStop Offset="1" Color="#CC0B2239"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <StackPanel VerticalAlignment="Bottom" Margin="26,0,26,20" Spacing="4">
+                        <TextBlock x:Name="HeroTitle"
+                                   FontSize="27"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   TextWrapping="Wrap"/>
+                        <TextBlock x:Name="HeroSubtitle"
+                                   FontSize="15"
+                                   Foreground="#DCE9F7"/>
+                    </StackPanel>
+
+                </Panel>
+            </Border>
+
+            <!-- معرفی -->
+            <Border Classes="card">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="دربارهٔ این پروژه"
+                               FontSize="18"
+                               FontWeight="Bold"/>
+                    <TextBlock x:Name="IntroText"
+                               FontSize="15"
+                               LineHeight="28"
+                               TextWrapping="Wrap"
+                               Opacity="0.85"/>
+                </StackPanel>
+            </Border>
+
+            <!-- آمار -->
+            <ItemsControl x:Name="StatList">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="4"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Classes="card" Margin="5">
+                            <StackPanel Spacing="2" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Key}"
+                                           FontSize="30"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource DcBrandBrush}"/>
+                                <TextBlock Text="{Binding Value}"
+                                           FontSize="13"
+                                           Opacity="0.7"
+                                           TextAlignment="Center"
+                                           TextWrapping="Wrap"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- بخش‌های برنامه -->
+            <TextBlock Text="بخش‌های برنامه"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="4,6,0,0"/>
+
+            <UniformGrid Columns="3">
+
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="🦷" FontSize="26"/>
+                        <TextBlock Text="تجهیزات" FontWeight="Bold" FontSize="15"/>
+                        <TextBlock Text="یونیت، رادیوگرافی، تهیه مواد، کمپرسور و اتوکلاو به‌همراه مشخصات فنی."
+                                   FontSize="13" Opacity="0.7" TextWrapping="Wrap" LineHeight="22"/>
+                    </StackPanel>
                 </Border>
 
-                <TextBlock
-                    Text="طراحی ساختمان مرکز دندانپزشکی"
-                    FontSize="32"
-                    FontWeight="Bold"
-                    TextAlignment="Center"
-                    TextWrapping="Wrap"/>
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="🏢" FontSize="26"/>
+                        <TextBlock Text="فضای فیزیکی" FontWeight="Bold" FontSize="15"/>
+                        <TextBlock Text="اتاق درمان، انتظار، پذیرش، تصویربرداری و سرویس بهداشتی."
+                                   FontSize="13" Opacity="0.7" TextWrapping="Wrap" LineHeight="22"/>
+                    </StackPanel>
+                </Border>
 
-                <TextBlock
-                    Text="با رویکرد بهره‌وری انرژی"
-                    FontSize="22"
-                    Foreground="#1976D2"
-                    TextAlignment="Center"/>
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="💡" FontSize="26"/>
+                        <TextBlock Text="بهره‌وری انرژی" FontWeight="Bold" FontSize="15"/>
+                        <TextBlock Text="روشنایی، سرمایش، گرمایش، تهویه، پوستهٔ ساختمان و انرژی خورشیدی."
+                                   FontSize="13" Opacity="0.7" TextWrapping="Wrap" LineHeight="22"/>
+                    </StackPanel>
+                </Border>
 
-                <Separator Margin="40,5"/>
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="👶" FontSize="26"/>
+                        <TextBlock Text="بخش کودکان" FontWeight="Bold" FontSize="15"/>
+                        <TextBlock Text="فضا و رنگ، فضای بازی و الزامات ایمنی مخصوص کودکان."
+                                   FontSize="13" Opacity="0.7" TextWrapping="Wrap" LineHeight="22"/>
+                    </StackPanel>
+                </Border>
 
-                <TextBlock
-                    Text="دانشجو : ........................................"
-                    FontSize="18"
-                    HorizontalAlignment="Center"/>
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="🧮" FontSize="26"/>
+                        <TextBlock Text="محاسبهٔ انرژی" FontWeight="Bold" FontSize="15"/>
+                        <TextBlock Text="برآورد مصرف سالانه و میزان صرفه‌جویی با اعمال راهکارها."
+                                   FontSize="13" Opacity="0.7" TextWrapping="Wrap" LineHeight="22"/>
+                    </StackPanel>
+                </Border>
 
-                <TextBlock
-                    Text="استاد راهنما : ................................"
-                    FontSize="18"
-                    HorizontalAlignment="Center"/>
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="📝" FontSize="26"/>
+                        <TextBlock Text="ثبت نظرات" FontWeight="Bold" FontSize="15"/>
+                        <TextBlock Text="ثبت بازخورد با امتیاز ستاره‌ای و ذخیره در پایگاه دادهٔ SQLite."
+                                   FontSize="13" Opacity="0.7" TextWrapping="Wrap" LineHeight="22"/>
+                    </StackPanel>
+                </Border>
 
-            </StackPanel>
+                <Border Classes="card" Margin="5">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="💬" FontSize="26"/>
+                        <TextBlock Text="نمایش نظرات" FontWeight="Bold" FontSize="15"/>
+                        <TextBlock Text="مرور همهٔ نظرها با جست‌وجو، فیلتر امتیاز و نمودار توزیع."
+                                   FontSize="13" Opacity="0.7" TextWrapping="Wrap" LineHeight="22"/>
+                    </StackPanel>
+                </Border>
 
-        </Border>
+            </UniformGrid>
 
-    </Grid>
+            <!-- شناسنامهٔ پروژه -->
+            <Border Classes="card" Margin="0,6,0,0">
+                <StackPanel Spacing="12">
+
+                    <TextBlock Text="شناسنامهٔ پروژه"
+                               FontSize="18"
+                               FontWeight="Bold"/>
+
+                    <UniformGrid Columns="2">
+
+                        <StackPanel Spacing="3" Margin="0,0,0,10">
+                            <TextBlock Text="دانشجو" FontSize="12.5" Opacity="0.6"/>
+                            <TextBlock x:Name="StudentText" FontSize="15" FontWeight="SemiBold"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="3" Margin="0,0,0,10">
+                            <TextBlock Text="استاد راهنما" FontSize="12.5" Opacity="0.6"/>
+                            <TextBlock x:Name="SupervisorText" FontSize="15" FontWeight="SemiBold"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="3">
+                            <TextBlock Text="دانشگاه" FontSize="12.5" Opacity="0.6"/>
+                            <TextBlock x:Name="UniversityText" FontSize="15" FontWeight="SemiBold"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="3">
+                            <TextBlock Text="سال" FontSize="12.5" Opacity="0.6"/>
+                            <TextBlock x:Name="YearText" FontSize="15" FontWeight="SemiBold"/>
+                        </StackPanel>
+
+                    </UniformGrid>
+
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+
+    </ScrollViewer>
 
 </UserControl>
