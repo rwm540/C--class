@@ -25,23 +25,22 @@
                                Opacity="0.35"/>
                 </StackPanel>
 
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                    <ListBox x:Name="TopicList"
-                             Classes="topics"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Padding="0"
-                             SelectionChanged="OnTopicChanged">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding ButtonText}"
-                                           FontSize="15"
-                                           FontWeight="SemiBold"
-                                           TextWrapping="Wrap"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </ScrollViewer>
+                <ListBox x:Name="TopicList"
+                         Classes="topics"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         Padding="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         SelectionChanged="OnTopicChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ButtonText}"
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
             </DockPanel>
 
