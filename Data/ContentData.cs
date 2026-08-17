@@ -12,7 +12,7 @@ public static class ContentData
 
     public const string ProjectSubtitle = "پروژهٔ درسی — نرم‌افزار ارائه";
 
-    public const string StudentName = "نام دانشجو";
+    public const string StudentName = "فائزه دهستانی";
 
     public const string SupervisorName = "نام استاد راهنما";
 

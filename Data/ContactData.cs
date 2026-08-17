@@ -40,7 +40,7 @@ public static class ContactData
             role: "دانشجو",
             icon: "👨‍🎓",
             name: ContentData.StudentName,
-            email: "student@example.com",
+            email: "f.dehestani@example.com",
             phone: "۰۹۱۲-۰۰۰۰۰۰۰")
     };
 }
