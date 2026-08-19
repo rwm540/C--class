@@ -146,7 +146,7 @@
                     <StackPanel Spacing="6">
                         <TextBlock Text="📝" FontSize="26"/>
                         <TextBlock Text="ثبت نظرات" FontWeight="Bold" FontSize="15"/>
-                        <TextBlock Text="ثبت بازخورد با امتیاز ستاره‌ای و ذخیره در پایگاه دادهٔ SQLite."
+                        <TextBlock Text="ثبت بازخورد و ذخیره در پایگاه دادهٔ SQLite."
                                    FontSize="13" Opacity="0.7" TextWrapping="Wrap" LineHeight="22"/>
                     </StackPanel>
                 </Border>
@@ -155,7 +155,7 @@
                     <StackPanel Spacing="6">
                         <TextBlock Text="💬" FontSize="26"/>
                         <TextBlock Text="نمایش نظرات" FontWeight="Bold" FontSize="15"/>
-                        <TextBlock Text="مرور همهٔ نظرها با جست‌وجو، فیلتر امتیاز و نمودار توزیع."
+                        <TextBlock Text="مرور همهٔ نظرهای ثبت‌شده."
                                    FontSize="13" Opacity="0.7" TextWrapping="Wrap" LineHeight="22"/>
                     </StackPanel>
                 </Border>

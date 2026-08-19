@@ -36,13 +36,14 @@ public partial class MainWindow : Window
 
         HeaderTitle.Text = ContentData.ProjectTitle;
         HeaderSubtitle.Text = ContentData.ProjectSubtitle;
+        HeaderSubtitle.IsVisible = !string.IsNullOrEmpty(ContentData.ProjectSubtitle);
         FooterName.Text = ContentData.StudentName + " — " + ContentData.AcademicYear;
         StatusRight.Text = "نسخهٔ ۲٫۰";
 
         BuildNav();
         Select(0);
 
-        btnTheme.Click += (_, _) => ToggleTheme();
+        btnTheme.IsVisible = false;
         btnAbout.Click += (_, _) => ShowAbout();
     }
 
@@ -117,17 +118,6 @@ public partial class MainWindow : Window
         }
     }
 
-    private void ToggleTheme()
-    {
-        var app = Application.Current;
-        if (app == null)
-            return;
-
-        var dark = app.ActualThemeVariant == ThemeVariant.Dark;
-        app.RequestedThemeVariant = dark ? ThemeVariant.Light : ThemeVariant.Dark;
-        btnTheme.Content = dark ? "🌙" : "☀";
-    }
-
     private void ShowAbout()
     {
         var lines = new[]
@@ -137,16 +127,14 @@ public partial class MainWindow : Window
             "دانشجو: " + ContentData.StudentName,
             "استاد راهنما: " + ContentData.SupervisorName,
             ContentData.University,
-            ContentData.AcademicYear,
-            "",
-            "ساخته‌شده با Avalonia UI و .NET"
+            ContentData.AcademicYear
         };
 
         var dialog = new Window
         {
             Title = "دربارهٔ برنامه",
             Width = 520,
-            Height = 340,
+            Height = 320,
             CanResize = false,
             FlowDirection = FlowDirection.RightToLeft,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,

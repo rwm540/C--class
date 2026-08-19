@@ -11,15 +11,10 @@ public partial class FeedbackView : UserControl
 {
     private readonly ObservableCollection<Feedback> _items = new();
 
-    private readonly Button[] _stars = new Button[5];
-
-    private int _rating = 5;
-
     public FeedbackView()
     {
         InitializeComponent();
 
-        BuildStars();
         FeedbackList.ItemsSource = _items;
 
         btnSubmit.Click += (_, _) => Submit();
@@ -27,48 +22,6 @@ public partial class FeedbackView : UserControl
         btnClear.Click += (_, _) => ClearAll();
 
         Reload();
-    }
-
-    /// <summary>ساخت پنج دکمهٔ ستاره برای امتیازدهی.</summary>
-    private void BuildStars()
-    {
-        for (var i = 0; i < 5; i++)
-        {
-            var value = i + 1;
-
-            var button = new Button
-            {
-                Content = "★",
-                FontSize = 24,
-                Width = 40,
-                Height = 40,
-                Padding = new Avalonia.Thickness(0),
-                HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Center,
-                VerticalContentAlignment = Avalonia.Layout.VerticalAlignment.Center,
-                Background = Brushes.Transparent,
-                BorderThickness = new Avalonia.Thickness(0),
-                Cursor = new Avalonia.Input.Cursor(Avalonia.Input.StandardCursorType.Hand)
-            };
-
-            button.Click += (_, _) => SetRating(value);
-
-            _stars[i] = button;
-            StarPanel.Children.Add(button);
-        }
-
-        SetRating(_rating);
-    }
-
-    private void SetRating(int value)
-    {
-        _rating = Math.Clamp(value, 1, 5);
-
-        for (var i = 0; i < _stars.Length; i++)
-        {
-            _stars[i].Foreground = i < _rating
-                ? new SolidColorBrush(Color.Parse("#F9A825"))
-                : new SolidColorBrush(Color.Parse("#C6CFD6"));
-        }
     }
 
     private void Submit()
@@ -103,7 +56,7 @@ public partial class FeedbackView : UserControl
             Name = name,
             Email = email,
             Subject = (SubjectBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "نظر کلی",
-            Rating = _rating,
+            Rating = 5,
             Message = message,
             CreatedAt = DateTime.Now
         };
@@ -138,7 +91,6 @@ public partial class FeedbackView : UserControl
         EmailBox.Text = "";
         MessageBox.Text = "";
         SubjectBox.SelectedIndex = 0;
-        SetRating(5);
     }
 
     private void Reload()
@@ -147,12 +99,11 @@ public partial class FeedbackView : UserControl
         foreach (var item in FeedbackStore.Load())
             _items.Add(item);
 
-        var (total, average) = FeedbackStore.Summary();
+        var total = FeedbackStore.Count();
 
         CountText.Text = total == 0
             ? "بدون نظر"
-            : total + " نظر — میانگین " +
-              average.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture) + " از ۵";
+            : total + " نظر ثبت شده";
 
         EmptyText.IsVisible = _items.Count == 0;
     }

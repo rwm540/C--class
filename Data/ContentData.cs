@@ -10,15 +10,15 @@ public static class ContentData
 {
     public const string ProjectTitle = "طراحی ساختمان مرکز دندانپزشکی با رویکرد بهره‌وری انرژی";
 
-    public const string ProjectSubtitle = "پروژهٔ درسی — نرم‌افزار ارائه";
+    public const string ProjectSubtitle = "";
 
     public const string StudentName = "فائزه دهستانی";
 
-    public const string SupervisorName = "نام استاد راهنما";
+    public const string SupervisorName = "دکتر علیرضا کریمیان";
 
-    public const string University = "دانشگاه ..............";
+    public const string University = "دانشگاه اصفهان";
 
-    public const string AcademicYear = "سال تحصیلی ۱۴۰۴";
+    public const string AcademicYear = "سال تحصیلی ۱۴۰۵";
 
     public const string HomeIntro =
         "این نرم‌افزار، نتایج مطالعهٔ طراحی یک مرکز دندانپزشکی را در چهار محور تجهیزات، " +
@@ -297,7 +297,7 @@ public static class ContentData
             image: "Energy/lighting.jpg",
             bullets: new[]
             {
-                "جایگزینی کامل لامپ‌ها با LED با بازده بالای ۱۰۰ لومن بر وات.",
+                "جایگزینی کامل لامپ‌ها با LED با بهره‌وری بالا.",
                 "سنسور حضور در راهرو، سرویس بهداشتی و انبار.",
                 "حسگر نور روز در فضاهای مجاور پنجره.",
                 "تفکیک مدارها برای خاموشی جزئی در ساعات کم‌کار.",

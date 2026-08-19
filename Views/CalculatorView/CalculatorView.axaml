@@ -198,15 +198,7 @@
                 </StackPanel>
             </Border>
 
-            <Border CornerRadius="12" Background="#FFF8E1" Padding="16">
-                <TextBlock Text="این محاسبه بر پایهٔ شاخص‌های تجربی مصرف در مراکز درمانی کوچک انجام می‌شود و جایگزین محاسبات دقیق تأسیساتی نیست."
-                           FontSize="12.5"
-                           Foreground="#8D6E00"
-                           LineHeight="24"
-                           TextWrapping="Wrap"/>
-            </Border>
-
-        </StackPanel>
+            </StackPanel>
 
     </ScrollViewer>
 

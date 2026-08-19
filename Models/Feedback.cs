@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text.Json.Serialization;
 
 namespace DentalCenter.Models;
@@ -29,11 +30,14 @@ public sealed class Feedback
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     [JsonIgnore]
-    public string Stars => new string('★', Math.Clamp(Rating, 0, 5))
-                           + new string('☆', 5 - Math.Clamp(Rating, 0, 5));
-
-    [JsonIgnore]
-    public string CreatedAtText => CreatedAt.ToString("yyyy/MM/dd  HH:mm");
+    public string CreatedAtText
+    {
+        get
+        {
+            var pc = new PersianCalendar();
+            return $"{pc.GetYear(CreatedAt):0000}/{pc.GetMonth(CreatedAt):00}/{pc.GetDayOfMonth(CreatedAt):00}  {pc.GetHour(CreatedAt):00}:{pc.GetMinute(CreatedAt):00}";
+        }
+    }
 
     [JsonIgnore]
     public string Header => string.IsNullOrWhiteSpace(Subject)

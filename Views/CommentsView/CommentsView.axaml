@@ -3,10 +3,7 @@
              x:Class="DentalCenter.Views.CommentsView"
              FlowDirection="RightToLeft">
 
-    <TabControl>
-
-      <TabItem Header="نظرات کاربران" FontSize="14">
-        <DockPanel Margin="0,14,0,0">
+    <DockPanel Margin="0,14,0,0">
 
         <!-- سرتیتر و خلاصهٔ آماری -->
         <StackPanel DockPanel.Dock="Top" Spacing="14" Margin="0,0,0,16">
@@ -29,77 +26,11 @@
 
             </Grid>
 
-            <!-- خلاصهٔ امتیازها -->
-            <Border Classes="card">
-                <Grid ColumnDefinitions="Auto,Auto,*">
-
-                    <StackPanel Grid.Column="0" Spacing="2" VerticalAlignment="Center">
-                        <TextBlock x:Name="AverageText"
-                                   FontSize="40"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"
-                                   Foreground="{DynamicResource DcBrandBrush}"/>
-                        <TextBlock x:Name="AverageStars"
-                                   FontSize="17"
-                                   Foreground="#F9A825"
-                                   HorizontalAlignment="Center"/>
-                        <TextBlock x:Name="TotalText"
-                                   FontSize="12"
-                                   Opacity="0.6"
-                                   HorizontalAlignment="Center"/>
-                    </StackPanel>
-
-                    <Rectangle Grid.Column="1"
-                               Width="1"
-                               Margin="22,6"
-                               Fill="{DynamicResource DcBorderBrush}"/>
-
-                    <ItemsControl Grid.Column="2" x:Name="HistogramList" VerticalAlignment="Center">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid ColumnDefinitions="40,*,44" Margin="0,3">
-                                    <TextBlock Grid.Column="0"
-                                               Text="{Binding Label}"
-                                               FontSize="12.5"
-                                               VerticalAlignment="Center"/>
-                                    <Border Grid.Column="1"
-                                            Height="11"
-                                            CornerRadius="6"
-                                            Background="{DynamicResource DcBorderBrush}">
-                                        <Border HorizontalAlignment="Right"
-                                                Width="{Binding BarWidth}"
-                                                CornerRadius="6"
-                                                Background="#F9A825"/>
-                                    </Border>
-                                    <TextBlock Grid.Column="2"
-                                               Text="{Binding CountText}"
-                                               FontSize="12"
-                                               Opacity="0.7"
-                                               HorizontalAlignment="Left"
-                                               VerticalAlignment="Center"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-
-                </Grid>
-            </Border>
-
-            <!-- جست‌وجو و فیلتر -->
-            <Grid ColumnDefinitions="*,190">
+            <!-- جست‌وجو -->
+            <Grid ColumnDefinitions="*">
                 <TextBox Grid.Column="0"
                          x:Name="SearchBox"
                          Watermark="جست‌وجو در نام، موضوع یا متن نظر..."/>
-                <ComboBox Grid.Column="1"
-                          x:Name="FilterBox"
-                          Margin="10,0,0,0"
-                          HorizontalAlignment="Stretch"
-                          SelectedIndex="0">
-                    <ComboBoxItem>همهٔ امتیازها</ComboBoxItem>
-                    <ComboBoxItem>۵ ستاره</ComboBoxItem>
-                    <ComboBoxItem>۴ ستاره و بالاتر</ComboBoxItem>
-                    <ComboBoxItem>۳ ستاره و بالاتر</ComboBoxItem>
-                </ComboBox>
             </Grid>
 
         </StackPanel>
@@ -144,21 +75,14 @@
 
                                 <StackPanel Grid.Column="1" Margin="13,0,0,0" Spacing="7">
 
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <StackPanel Grid.Column="0" Spacing="2">
-                                            <TextBlock Text="{Binding Name}"
-                                                       FontWeight="Bold"
-                                                       FontSize="14.5"/>
-                                            <TextBlock Text="{Binding Subject}"
-                                                       FontSize="12"
-                                                       Opacity="0.6"/>
-                                        </StackPanel>
-                                        <TextBlock Grid.Column="1"
-                                                   Text="{Binding Stars}"
-                                                   Foreground="#F9A825"
-                                                   FontSize="15"
-                                                   VerticalAlignment="Top"/>
-                                    </Grid>
+                                    <StackPanel Grid.Column="0" Spacing="2">
+                                        <TextBlock Text="{Binding Name}"
+                                                   FontWeight="Bold"
+                                                   FontSize="14.5"/>
+                                        <TextBlock Text="{Binding Subject}"
+                                                   FontSize="12"
+                                                   Opacity="0.6"/>
+                                    </StackPanel>
 
                                     <TextBlock Text="{Binding Message}"
                                                FontSize="13.5"
@@ -192,80 +116,6 @@
             </ItemsControl>
         </ScrollViewer>
 
-        </DockPanel>
-      </TabItem>
-
-      <!-- تب دوم: پیام‌های دریافتی از فرم تماس با ما -->
-      <TabItem Header="پیام‌های تماس" FontSize="14">
-        <DockPanel Margin="0,14,0,0">
-
-          <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,14">
-            <StackPanel Grid.Column="0" Spacing="3">
-              <TextBlock x:Name="MessageCountText" FontSize="17" FontWeight="Bold"/>
-              <TextBlock Text="پیام‌هایی که از طریق فرم «تماس با ما» ثبت شده‌اند."
-                         FontSize="12.5" Opacity="0.65"/>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
-              <Button x:Name="btnRefreshMessages" Content="🔄  تازه‌سازی" Height="38"/>
-              <Button x:Name="btnClearMessages" Content="حذف همه" Height="38"/>
-            </StackPanel>
-          </Grid>
-
-          <StackPanel x:Name="EmptyMessagesPanel" DockPanel.Dock="Top"
-                      Spacing="8" Margin="0,50,0,0" IsVisible="False">
-            <TextBlock Text="✉" FontSize="46" Opacity="0.3" HorizontalAlignment="Center"/>
-            <TextBlock Text="هنوز پیامی از فرم تماس ثبت نشده است."
-                       Opacity="0.6" FontSize="14" TextAlignment="Center"
-                       HorizontalAlignment="Center"/>
-          </StackPanel>
-
-          <ScrollViewer>
-            <ItemsControl x:Name="MessageList">
-              <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                  <Border Classes="card" Margin="0,0,0,12">
-                    <Grid ColumnDefinitions="Auto,*">
-
-                      <Border Grid.Column="0" Width="46" Height="46" CornerRadius="23"
-                              VerticalAlignment="Top"
-                              Background="{DynamicResource DcBrandLightBrush}">
-                        <TextBlock Text="{Binding Initial}" FontSize="19" FontWeight="Bold"
-                                   Foreground="{DynamicResource DcBrandDarkBrush}"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                      </Border>
-
-                      <StackPanel Grid.Column="1" Margin="13,0,0,0" Spacing="7">
-
-                        <Grid ColumnDefinitions="*,Auto">
-                          <StackPanel Grid.Column="0" Spacing="2">
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14.5"/>
-                            <TextBlock Text="{Binding Subject}" FontSize="12" Opacity="0.6"/>
-                          </StackPanel>
-                          <StackPanel Grid.Column="1" Spacing="2" HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding Email}" FontSize="11.5" Opacity="0.7"
-                                       FlowDirection="LeftToRight" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Phone}" FontSize="11.5" Opacity="0.7"
-                                       FlowDirection="LeftToRight" HorizontalAlignment="Left"/>
-                          </StackPanel>
-                        </Grid>
-
-                        <TextBlock Text="{Binding Message}" FontSize="13.5" LineHeight="25"
-                                   TextWrapping="Wrap" Opacity="0.88"/>
-
-                        <TextBlock Text="{Binding CreatedAtText}" FontSize="11.5" Opacity="0.5"
-                                   FlowDirection="LeftToRight" HorizontalAlignment="Left"/>
-
-                      </StackPanel>
-                    </Grid>
-                  </Border>
-                </DataTemplate>
-              </ItemsControl.ItemTemplate>
-            </ItemsControl>
-          </ScrollViewer>
-
-        </DockPanel>
-      </TabItem>
-
-    </TabControl>
+    </DockPanel>
 
 </UserControl>

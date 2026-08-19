@@ -12,6 +12,7 @@ public partial class HomeView : UserControl
 
         HeroTitle.Text = ContentData.ProjectTitle;
         HeroSubtitle.Text = ContentData.ProjectSubtitle;
+        HeroSubtitle.IsVisible = !string.IsNullOrEmpty(ContentData.ProjectSubtitle);
         IntroText.Text = ContentData.HomeIntro;
 
         StudentText.Text = ContentData.StudentName;
