@@ -40,9 +40,6 @@ public partial class DetailPageView : UserControl
 
         TopicTitle.Text = topic.Icon + "  " + topic.Title;
         TopicSummary.Text = topic.Summary;
-        BulletList.ItemsSource = topic.Bullets;
-        SpecList.ItemsSource = topic.Specs;
-        EnergyNote.Text = topic.EnergyNote;
 
         var bitmap = AssetsHelper.LoadImage(topic.Image);
         TopicImage.Source = bitmap;
