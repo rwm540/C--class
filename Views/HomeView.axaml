@@ -101,7 +101,7 @@
                     <StackPanel Spacing="6">
                         <TextBlock Text="🦷" FontSize="26"/>
                         <TextBlock Text="تجهیزات" FontWeight="Bold" FontSize="15"/>
-                        <TextBlock Text="یونیت، رادیوگرافی، تهیه مواد، کمپرسور و اتوکلاو به‌همراه مشخصات فنی."
+                        <TextBlock Text="یونیت، رادیوگرافی، تهیه مواد، کمپرسور و اتوکلاو."
                                    FontSize="13" Opacity="0.7" TextWrapping="Wrap" LineHeight="22"/>
                     </StackPanel>
                 </Border>
