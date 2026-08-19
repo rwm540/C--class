@@ -125,6 +125,22 @@ public static class FeedbackStore
         }
     }
 
+    /// <summary>تعداد کل نظرات.</summary>
+    public static int Count()
+    {
+        try
+        {
+            using var connection = Database.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText = "SELECT COUNT(*) FROM Feedback;";
+            return Convert.ToInt32(command.ExecuteScalar());
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
     /// <summary>تعداد کل نظرات و میانگین امتیاز.</summary>
     public static (int Count, double Average) Summary()
     {

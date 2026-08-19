@@ -45,12 +45,7 @@
                     </ComboBox>
                 </StackPanel>
 
-                <StackPanel Spacing="6">
-                    <TextBlock Text="امتیاز" FontSize="12.5" Opacity="0.7"/>
-                    <StackPanel x:Name="StarPanel"
-                                Orientation="Horizontal"
-                                Spacing="4"/>
-                </StackPanel>
+                
 
                 <StackPanel Spacing="4">
                     <TextBlock Text="متن نظر" FontSize="12.5" Opacity="0.7"/>
@@ -119,17 +114,10 @@
                             <DataTemplate>
                                 <Border Classes="card" Margin="0,0,0,10">
                                     <StackPanel Spacing="6">
-                                        <Grid ColumnDefinitions="*,Auto">
-                                            <TextBlock Grid.Column="0"
-                                                       Text="{Binding Header}"
-                                                       FontWeight="Bold"
-                                                       FontSize="14"
-                                                       TextTrimming="CharacterEllipsis"/>
-                                            <TextBlock Grid.Column="1"
-                                                       Text="{Binding Stars}"
-                                                       Foreground="#F9A825"
-                                                       FontSize="14"/>
-                                        </Grid>
+                                        <TextBlock Text="{Binding Header}"
+                                                   FontWeight="Bold"
+                                                   FontSize="14"
+                                                   TextTrimming="CharacterEllipsis"/>
                                         <TextBlock Text="{Binding Message}"
                                                    FontSize="13.5"
                                                    LineHeight="24"

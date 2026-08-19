@@ -32,15 +32,15 @@ public static class ContactData
         new ContactInfo(
             role: "استاد راهنما",
             icon: "🎓",
-            name: ContentData.SupervisorName,
-            email: "supervisor@example.com",
-            phone: "۰۲۱-۰۰۰۰۰۰۰۰"),
+            name: "دکتر علیرضا کریمیان",
+            email: "drkarimian2020@gmail.com",
+            phone: "۰۳۱۳۷۹۳۴۰۵۹"),
 
         new ContactInfo(
             role: "دانشجو",
             icon: "👨‍🎓",
             name: ContentData.StudentName,
-            email: "f.dehestani@example.com",
-            phone: "۰۹۱۲-۰۰۰۰۰۰۰")
+            email: "dehestanifaeze6@gmail.com",
+            phone: "۰۹۹۰۵۰۴۸۳۶۹")
     };
 }
