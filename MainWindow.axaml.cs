@@ -43,7 +43,6 @@ public partial class MainWindow : Window
         BuildNav();
         Select(0);
 
-        btnTheme.IsVisible = false;
         btnAbout.Click += (_, _) => ShowAbout();
     }
 

@@ -29,6 +29,10 @@
     <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.0" />
     <!-- پایگاه دادهٔ محلی؛ کتابخانهٔ بومی SQLite همراه پکیج و داخل exe قرار می‌گیرد. -->
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.0" />
+    <!-- رفع هشدار امنیتی NU1903 (GHSA-2m69-gcr7-jv3q / CVE-2025-6965):
+         Microsoft.Data.Sqlite به‌صورت ترایتیو نسخهٔ آسیب‌پذیر 2.1.11 را می‌آورد؛
+         با پین کردن نسخهٔ 3.x کتابخانهٔ بومی SQLite، نسخهٔ امن جایگزین می‌شود. -->
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.53.3" />
     <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3">
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
