@@ -89,7 +89,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <!-- نگاه ویژه: تصویربرداری و هوش مصنوعی -->
+            <!-- نگاه ویژه: تصویربرداری و انرژی خورشیدی -->
             <TextBlock Text="نگاه ویژه"
                        FontSize="18"
                        FontWeight="Bold"
@@ -132,20 +132,20 @@
                                 Height="150"
                                 Background="{DynamicResource DcBrandLightBrush}">
                             <Panel>
-                                <TextBlock Text="🤖"
+                                <TextBlock Text="☀"
                                            FontSize="40"
                                            Opacity="0.3"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
-                                <Image x:Name="AiImage"
+                                <Image x:Name="SolarImage"
                                        Stretch="UniformToFill"
                                        FlowDirection="LeftToRight"/>
                             </Panel>
                         </Border>
-                        <TextBlock Text="بهره‌وری انرژی با هوش مصنوعی"
+                        <TextBlock Text="نور طبیعی و انرژی خورشیدی"
                                    FontWeight="Bold"
                                    FontSize="14.5"/>
-                        <TextBlock x:Name="AiNote"
+                        <TextBlock x:Name="SolarNote"
                                    FontSize="12.5"
                                    Opacity="0.7"
                                    LineHeight="21"
