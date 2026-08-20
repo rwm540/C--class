@@ -16,7 +16,8 @@ public sealed class Topic
         IReadOnlyList<string> bullets,
         IReadOnlyList<Spec> specs,
         string energyNote,
-        string? pdf = null)
+        string? pdf = null,
+        string? keywords = null)
     {
         Id = id;
         Icon = icon;
@@ -27,6 +28,7 @@ public sealed class Topic
         Specs = specs;
         EnergyNote = energyNote;
         Pdf = pdf ?? id + ".pdf";
+        Keywords = keywords;
     }
 
     public string Id { get; }
@@ -52,6 +54,9 @@ public sealed class Topic
 
     /// <summary>نام فایل PDF نسبت به Assets/PDF.</summary>
     public string Pdf { get; }
+
+    /// <summary>واژگان کلیدی موضوع (اختیاری).</summary>
+    public string? Keywords { get; }
 
     public string ButtonText => Icon + "  " + Title;
 }

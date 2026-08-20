@@ -46,6 +46,20 @@ public partial class DetailPageView : UserControl
         TopicImage.IsVisible = bitmap != null;
         ImageFallback.IsVisible = bitmap == null;
 
+        BulletsList.ItemsSource = topic.Bullets;
+        BulletsSection.IsVisible = topic.Bullets.Count > 0;
+
+        SpecsList.ItemsSource = topic.Specs;
+        SpecsSection.IsVisible = topic.Specs.Count > 0;
+
+        var hasKeywords = !string.IsNullOrWhiteSpace(topic.Keywords);
+        KeywordsSection.IsVisible = hasKeywords;
+        KeywordsText.Text = topic.Keywords ?? "";
+
+        var hasEnergyNote = !string.IsNullOrWhiteSpace(topic.EnergyNote);
+        EnergyNoteSection.IsVisible = hasEnergyNote;
+        EnergyNoteText.Text = topic.EnergyNote;
+
         var hasPdf = AssetsHelper.PdfExists(topic.Pdf);
         btnPdf.IsEnabled = hasPdf;
         PdfHint.Text = hasPdf
