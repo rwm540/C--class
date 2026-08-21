@@ -7,3 +7,5 @@ publish/
 *.userosscache
 *.sln.docstates
 DentalCenter-crash.log
+__pycache__/
+*.pyc

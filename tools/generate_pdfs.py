@@ -2,12 +2,16 @@
 """
 Generate one Persian (RTL) PDF per topic of the DentalCenter app.
 
-Parses Data/ContentData.cs and writes Assets/PDF/<id>.pdf for every topic,
-so the «مشاهده PDF» buttons of the app become active.
+Parses Data/ContentData.cs (title/summary/bullets) and merges it with
+tools/pdf_extras.json, which holds the parts that are intentionally NOT shown in
+the application UI any more — «مشخصات فنی», «واژگان کلیدی» and
+«نکتهٔ بهره‌وری انرژی». The result is written to Assets/PDF/<id>.pdf for every
+topic, so those details live only inside the PDF files.
 
 Dependencies (pip): fpdf2, uharfbuzz
 Run from the repository root:  python3 tools/generate_pdfs.py
 """
+import json
 import os
 import re
 import sys
@@ -16,6 +20,7 @@ from fpdf import FPDF
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, "Data", "ContentData.cs")
+EXTRAS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pdf_extras.json")
 PDF_DIR = os.path.join(ROOT, "Assets", "PDF")
 REGULAR = os.path.join(ROOT, "Assets", "Fonts", "Vazirmatn-Regular.ttf")
 BOLD = os.path.join(ROOT, "Assets", "Fonts", "Vazirmatn-Bold.ttf")
@@ -52,8 +57,18 @@ def _clean(s):
     return s.replace('\\"', '"').strip()
 
 
+def load_extras():
+    """Technical details that were removed from the app UI and live only in PDFs."""
+    if not os.path.exists(EXTRAS):
+        print("WARN: extras file not found:", EXTRAS, file=sys.stderr)
+        return {}
+    with open(EXTRAS, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
 def parse_topics():
     src = open(CONTENT, encoding="utf-8").read()
+    extras = load_extras()
 
     sections = {}
     for key in SECTION_LABELS:
@@ -138,31 +153,23 @@ def parse_topics():
 
             topic_id = field("id")
             title = field("title")
-            summary = multiline("summary", ["image", "bullets", "specs", "energyNote", "keywords"])
+            summary = multiline("summary", ["image", "bullets", "pdf"])
             image = field("image")
 
             # bullets: strings between "bullets: new[]" and "specs:"
             bm = re.search(r"bullets\s*:\s*new\[\]", body)
             bullets = []
             if bm:
-                b_end = body.find("specs", bm.end())
+                b_close = body.find("}", bm.end())
+                b_end = b_close if b_close >= 0 else len(body)
                 bullets = [_clean(s) for s in re.findall(r'"((?:[^"\\]|\\.)*)"', body[bm.end():b_end])]
 
-            # specs: pairs between "specs: new[]" and "energyNote:"
-            sm = re.search(r"specs\s*:\s*new\[\]", body)
-            specs = []
-            if sm:
-                s_end = body.find("energyNote", sm.end())
-                specs = [
-                    (_clean(k), _clean(v))
-                    for k, v in re.findall(
-                        r'new Spec\(\s*"((?:[^"\\]|\\.)*)"\s*,\s*"((?:[^"\\]|\\.)*)"\s*\)',
-                        body[sm.end():s_end],
-                    )
-                ]
-
-            energy_note = multiline("energyNote", ["keywords"])
-            keywords = field("keywords")
+            # مشخصات فنی / واژگان کلیدی / نکتهٔ بهره‌وری انرژی فقط در فایل
+            # tools/pdf_extras.json نگهداری می‌شوند (در برنامه نمایش داده نمی‌شوند).
+            extra = extras.get(topic_id, {})
+            specs = [(k, v) for k, v in extra.get("specs", [])]
+            energy_note = extra.get("energyNote", "")
+            keywords = extra.get("keywords", "")
 
             topics.append(
                 {
@@ -198,8 +205,9 @@ class ThesisPdf(FPDF):
         self.set_y(-14)
         self.set_font("vazir", "", 8.5)
         self.set_text_color(*GRAY)
-        self.cell(0, 8, f"صفحه {self.page_no()}", align="R")
-        self.cell(0, 8, f"{STUDENT} — {SUPERVISOR}", align="L")
+        half = (self.w - self.l_margin - self.r_margin) / 2
+        self.cell(half, 8, f"صفحه {self.page_no()}", align="R")
+        self.cell(half, 8, f"{STUDENT} — {SUPERVISOR}", align="L")
 
     def section(self, text):
         self.ln(3)
@@ -282,14 +290,15 @@ def build_pdf(topic, out_path):
         pdf.set_text_color(*BRAND_DARK)
         pdf.set_font("vazir", "B", 10.5)
         col = (pdf.w - pdf.l_margin - pdf.r_margin) / 2
-        pdf.cell(col, 9, "شاخص", border=1, fill=True, align="R")
+        # ستون سمت راست «شاخص» و ستون سمت چپ «مقدار» است (چیدمان راست‌به‌چپ).
         pdf.cell(col, 9, "مقدار", border=1, fill=True, align="R")
+        pdf.cell(col, 9, "شاخص", border=1, fill=True, align="R")
         pdf.ln()
         pdf.set_font("vazir", "", 10.5)
         pdf.set_text_color(40, 48, 58)
         for k, v in topic["specs"]:
-            pdf.cell(col, 9, k, border=1, align="R")
             pdf.cell(col, 9, v, border=1, align="R")
+            pdf.cell(col, 9, k, border=1, align="R")
             pdf.ln()
         pdf.ln(2)
 
@@ -303,11 +312,10 @@ def build_pdf(topic, out_path):
     # Energy note
     if topic["energy_note"]:
         pdf.ln(2)
-        y0 = pdf.get_y()
         pdf.set_fill_color(*GREEN_BG)
         pdf.set_draw_color(*GREEN_BORDER)
         pdf.set_line_width(0.4)
-        box = pdf.multi_cell(
+        pdf.multi_cell(
             0, 7.5, "نکتهٔ بهره‌وری انرژی:\n" + topic["energy_note"],
             align="R", fill=True, border=1,
         )

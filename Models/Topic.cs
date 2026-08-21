@@ -4,6 +4,8 @@ namespace DentalCenter.Models;
 
 /// <summary>
 /// یک موضوع قابل نمایش در صفحات جزئیات (تجهیزات، فضای فیزیکی، بهره‌وری انرژی).
+/// جزئیات فنی (مشخصات فنی، واژگان کلیدی و نکتهٔ بهره‌وری انرژی) در نرم‌افزار نمایش
+/// داده نمی‌شوند و فقط داخل فایل PDF همان موضوع آمده‌اند.
 /// </summary>
 public sealed class Topic
 {
@@ -14,10 +16,7 @@ public sealed class Topic
         string summary,
         string image,
         IReadOnlyList<string> bullets,
-        IReadOnlyList<Spec> specs,
-        string energyNote,
-        string? pdf = null,
-        string? keywords = null)
+        string? pdf = null)
     {
         Id = id;
         Icon = icon;
@@ -25,10 +24,7 @@ public sealed class Topic
         Summary = summary;
         Image = image;
         Bullets = bullets;
-        Specs = specs;
-        EnergyNote = energyNote;
         Pdf = pdf ?? id + ".pdf";
-        Keywords = keywords;
     }
 
     public string Id { get; }
@@ -46,22 +42,13 @@ public sealed class Topic
     /// <summary>نکات کلیدی طراحی.</summary>
     public IReadOnlyList<string> Bullets { get; }
 
-    /// <summary>مشخصات فنی به‌صورت کلید/مقدار.</summary>
-    public IReadOnlyList<Spec> Specs { get; }
-
-    /// <summary>نکتهٔ مربوط به بهره‌وری انرژی.</summary>
-    public string EnergyNote { get; }
-
     /// <summary>نام فایل PDF نسبت به Assets/PDF.</summary>
     public string Pdf { get; }
-
-    /// <summary>واژگان کلیدی موضوع (اختیاری).</summary>
-    public string? Keywords { get; }
 
     public string ButtonText => Icon + "  " + Title;
 }
 
-/// <summary>یک ردیف از جدول مشخصات فنی.</summary>
+/// <summary>یک جفت کلید/مقدار (برای آمار صفحهٔ نخست).</summary>
 public sealed class Spec
 {
     public Spec(string key, string value)

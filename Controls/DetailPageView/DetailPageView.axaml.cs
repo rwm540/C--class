@@ -49,17 +49,8 @@ public partial class DetailPageView : UserControl
         BulletsList.ItemsSource = topic.Bullets;
         BulletsSection.IsVisible = topic.Bullets.Count > 0;
 
-        SpecsList.ItemsSource = topic.Specs;
-        SpecsSection.IsVisible = topic.Specs.Count > 0;
-
-        var hasKeywords = !string.IsNullOrWhiteSpace(topic.Keywords);
-        KeywordsSection.IsVisible = hasKeywords;
-        KeywordsText.Text = topic.Keywords ?? "";
-
-        var hasEnergyNote = !string.IsNullOrWhiteSpace(topic.EnergyNote);
-        EnergyNoteSection.IsVisible = hasEnergyNote;
-        EnergyNoteText.Text = topic.EnergyNote;
-
+        // مشخصات فنی، واژگان کلیدی و نکتهٔ بهره‌وری انرژی در نرم‌افزار نمایش داده
+        // نمی‌شوند؛ این موارد فقط داخل فایل PDF مربوط به همین موضوع آمده‌اند.
         var hasPdf = AssetsHelper.PdfExists(topic.Pdf);
         btnPdf.IsEnabled = hasPdf;
         PdfHint.Text = hasPdf

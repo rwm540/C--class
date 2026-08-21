@@ -102,80 +102,35 @@
                     </ItemsControl>
                 </StackPanel>
 
-                <!-- مشخصات فنی -->
-                <StackPanel x:Name="SpecsSection" Spacing="10">
-                    <TextBlock Text="مشخصات فنی"
-                               FontSize="17"
-                               FontWeight="Bold"
-                               Foreground="{DynamicResource DcBrandDarkBrush}"/>
-                    <Border Classes="card" Padding="8">
-                        <ItemsControl x:Name="SpecsList">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid ColumnDefinitions="*,*" Margin="8,7">
-                                        <TextBlock Grid.Column="0"
-                                                   Text="{Binding Key}"
-                                                   FontSize="13.5"
-                                                   Opacity="0.72"/>
-                                        <TextBlock Grid.Column="1"
-                                                   Text="{Binding Value}"
-                                                   FontSize="13.5"
-                                                   FontWeight="SemiBold"
-                                                   TextWrapping="Wrap"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Border>
-                </StackPanel>
-
-                <!-- واژگان کلیدی -->
-                <StackPanel x:Name="KeywordsSection" Spacing="10" IsVisible="False">
-                    <TextBlock Text="واژگان کلیدی"
-                               FontSize="17"
-                               FontWeight="Bold"
-                               Foreground="{DynamicResource DcBrandDarkBrush}"/>
-                    <Border Classes="card" Padding="14">
-                        <TextBlock x:Name="KeywordsText"
-                                   FontSize="13.5"
-                                   LineHeight="24"
-                                   TextWrapping="Wrap"
-                                   Foreground="{DynamicResource DcBrandDarkBrush}"/>
-                    </Border>
-                </StackPanel>
-
-                <!-- نکتهٔ بهره‌وری انرژی -->
-                <Border x:Name="EnergyNoteSection"
-                        IsVisible="False"
-                        CornerRadius="14"
+                <!-- جزئیات فنی فقط در فایل PDF -->
+                <Border CornerRadius="14"
                         Padding="16"
-                        Background="#E8F5E9"
-                        BorderBrush="#A5D6A7"
-                        BorderThickness="1">
-                    <StackPanel Spacing="6">
-                        <TextBlock Text="💡 نکتهٔ بهره‌وری انرژی"
+                        Background="{DynamicResource DcBrandLightBrush}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="جزئیات بیشتر در فایل PDF"
+                                   FontSize="15"
                                    FontWeight="Bold"
-                                   FontSize="14.5"
-                                   Foreground="#2E7D32"/>
-                        <TextBlock x:Name="EnergyNoteText"
+                                   Foreground="{DynamicResource DcBrandDarkBrush}"/>
+                        <TextBlock Text="مشخصات فنی، واژگان کلیدی و نکتهٔ بهره‌وری انرژیِ این موضوع در فایل PDF همین صفحه آمده است."
                                    FontSize="13.5"
                                    LineHeight="24"
                                    TextWrapping="Wrap"
-                                   Foreground="#1B5E20"/>
+                                   Opacity="0.8"/>
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button x:Name="btnPdf"
+                                    Classes="primary"
+                                    Content="📄  مشاهده PDF"
+                                    Width="170"/>
+                            <TextBlock x:Name="PdfHint"
+                                       VerticalAlignment="Center"
+                                       FontSize="12.5"
+                                       Opacity="0.65"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
 
-                <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,6,0,10">
-                    <Button x:Name="btnPdf"
-                            Classes="primary"
-                            Content="📄  مشاهده PDF"
-                            Width="170"/>
-                    <TextBlock x:Name="PdfHint"
-                               VerticalAlignment="Center"
-                               FontSize="12.5"
-                               Opacity="0.65"
-                               TextWrapping="Wrap"/>
-                </StackPanel>
+                <Panel Height="6"/>
 
             </StackPanel>
 
